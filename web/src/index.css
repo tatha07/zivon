@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+/* Field Notes design tokens — docs/frontend/design-doctrine.md §3–5. Do not add new colors. */
+@theme {
+  --color-paper: #efe6b8;
+  --color-paper-light: #f6f0cf;
+  --color-ink: #1c1b18;
+  --color-graphite: #5a5748;
+  --color-pen-blue: #1f3a9e;
+  --color-pencil-red: #b3261e;
+  --color-tick-green: #2f6b2f;
+
+  --font-display: "Bricolage Grotesque", Arial, sans-serif;
+  --font-notes: "Courier Prime", "Courier New", monospace;
+  --font-hand: "Caveat", "Segoe Print", cursive;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Visible keyboard focus everywhere: pen-blue outline with offset (doctrine a11y rule). */
+:focus-visible {
+  outline: 3px solid var(--color-pen-blue);
+  outline-offset: 3px;
+}
+
+/* Soft fade-in for content that swaps between views. */
+@keyframes pagefade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-fade {
+  animation: pagefade 0.35s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-fade {
+    animation: none;
+  }
+}
