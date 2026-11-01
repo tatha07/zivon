@@ -17,6 +17,17 @@
 
 :root {
   color-scheme: light;
+  --paper: #efe6b8;
+  --paper-light: #f6f0cf;
+  --ink: #1c1b18;
+  --graphite: #5a5748;
+  --pen-blue: #1f3a9e;
+  --pencil-red: #b3261e;
+  --tick-green: #2f6b2f;
+
+  --display: "Bricolage Grotesque", Arial, sans-serif;
+  --notes: "Courier Prime", "Courier New", monospace;
+  --hand: "Caveat", "Segoe Print", cursive;
 }
 
 html {

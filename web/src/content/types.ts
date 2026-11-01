@@ -9,7 +9,7 @@
  * Pipeline note: emit one of these keys when the generated page has a matching
  * sketch; omit the field otherwise. Never point at an image URL — sketches are code.
  */
-export type SketchKey = 'pendulum' | 'ray' | 'wave' | 'circuit'
+export type SketchKey = 'pendulum' | 'ray' | 'wave' | 'circuit' | 'motion'
 
 /**
  * Key of an interactive simulation rig mounted inside the course page.
@@ -17,7 +17,7 @@ export type SketchKey = 'pendulum' | 'ray' | 'wave' | 'circuit'
  * a course carries a simulation key instead of the page importing rig code directly.
  * Pipeline note: optional. Omit until a real interactive block exists for the topic.
  */
-export type SimulationKey = 'pendulum' | 'wave'
+export type SimulationKey = 'pendulum' | 'wave' | 'ray' | 'circuit' | 'motion'
 
 /** One lesson / section inside a course. Maps to one Synthesizer JSON block group. */
 export interface Lesson {

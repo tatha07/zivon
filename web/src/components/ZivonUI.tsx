@@ -8,6 +8,9 @@ import PenUnderline from './PenUnderline'
 import HandDrawnSketches from './HandDrawnSketches'
 import PendulumSim from '../simulations/PendulumSim'
 import WaveSim from '../simulations/WaveSim'
+import RayOpticsSim from '../simulations/RayOpticsSim'
+import CircuitSim from '../simulations/CircuitSim'
+import MotionSim from '../simulations/MotionSim'
 import { getCourses, getCourseById, IS_FILLER_CONTENT } from '../content/courseSource'
 import type { Course } from '../content/types'
 
@@ -367,6 +370,9 @@ export function Home({ go }: { go: (v: View) => void }) {
 const SIMS: Record<string, React.ComponentType> = {
   pendulum: PendulumSim,
   wave: WaveSim,
+  ray: RayOpticsSim,
+  circuit: CircuitSim,
+  motion: MotionSim,
 }
 
 export function CoursePage({ id, go }: { id: string; go: (v: View) => void }) {

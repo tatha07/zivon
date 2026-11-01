@@ -1,0 +1,8 @@
+{
+  "name": "Zivon — Physics, the notebook way",
+  "description": "Zivon — physics for Class 9 to 12, one topic at a time. Read it, play with it, ask out loud.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -14,12 +14,12 @@ export const FILLER_COURSES: Course[] = [
     chapterTag: 'Ch 8 · placeholder',
     summary: 'Speed, velocity, and reading a distance-time graph — sample topic, not real course content yet.',
     equation: 'v = u + at',
-    sketch: 'wave',
-    simulation: 'wave',
+    sketch: 'motion',
+    simulation: 'motion',
     lessons: [
-      { id: 'filler-motion-1', title: 'Filler lesson: rest, motion, and reference points', summary: 'Placeholder text. The real lesson will explain why "still" depends on where you are standing.' },
-      { id: 'filler-motion-2', title: 'Filler lesson: speed vs. velocity', summary: 'Placeholder text. Distance, displacement, and the one word that separates the two.' },
-      { id: 'filler-motion-3', title: 'Filler lesson: equations of motion', summary: 'Placeholder text. Three formulas, when each one applies, and a worked example.', status: 'done' },
+      { id: 'filler-motion-1', title: 'Rest, motion, and reference frames', summary: 'Why "still" depends on where you stand — relative motion and reference points.' },
+      { id: 'filler-motion-2', title: 'Speed vs. velocity', summary: 'Distance vs displacement, scalars vs vectors, and the direction that separates them.' },
+      { id: 'filler-motion-3', title: 'Equations of uniformly accelerated motion', summary: 'Three kinematic equations: v = u + at, s = ut + ½at², and v² = u² + 2as.', status: 'done' },
     ],
   },
   {
@@ -30,9 +30,10 @@ export const FILLER_COURSES: Course[] = [
     summary: 'How light bounces, and why mirrors flip left-to-right — sample topic, not real course content yet.',
     equation: 'θᵢ = θᵣ',
     sketch: 'ray',
+    simulation: 'ray',
     lessons: [
-      { id: 'filler-light-1', title: 'Filler lesson: laws of reflection', summary: 'Placeholder text. Two laws, one normal line, and angles measured from it.' },
-      { id: 'filler-light-2', title: 'Filler lesson: plane and spherical mirrors', summary: 'Placeholder text. Concave, convex, and what each does to your image.' },
+      { id: 'filler-light-1', title: 'Laws of reflection', summary: 'Two laws, the perpendicular normal line, and why angles are measured from the normal.' },
+      { id: 'filler-light-2', title: 'Plane mirrors and virtual images', summary: 'Virtual, erect, laterally inverted, and same distance behind the mirror.' },
     ],
   },
   {
@@ -45,9 +46,9 @@ export const FILLER_COURSES: Course[] = [
     sketch: 'pendulum',
     simulation: 'pendulum',
     lessons: [
-      { id: 'filler-osc-1', title: 'Filler lesson: periodic motion around us', summary: 'Placeholder text. Swings, heartbeats, quartz — spotting repeats everywhere.' },
-      { id: 'filler-osc-2', title: 'Filler lesson: the simple pendulum', summary: 'Placeholder text. Length, gravity, and why mass does not matter.' },
-      { id: 'filler-osc-3', title: 'Filler lesson: measuring g with a pendulum', summary: 'Placeholder text. One stopwatch, one string, one school lab.' },
+      { id: 'filler-osc-1', title: 'Periodic motion and time period', summary: 'Swings, heartbeats, clocks — spotting repeats and restoring forces.' },
+      { id: 'filler-osc-2', title: 'The simple pendulum equation', summary: 'Length, gravity, and proving why bob mass does not affect time period.' },
+      { id: 'filler-osc-3', title: 'Measuring local g with a pendulum', summary: 'Using length and oscillation stopwatch timings in the physics lab.' },
     ],
   },
   {
@@ -58,9 +59,10 @@ export const FILLER_COURSES: Course[] = [
     summary: 'Current, voltage, and what happens when you add another bulb — sample topic, not real course content yet.',
     equation: 'V = IR',
     sketch: 'circuit',
+    simulation: 'circuit',
     lessons: [
-      { id: 'filler-circ-1', title: 'Filler lesson: current, voltage, resistance', summary: 'Placeholder text. The water-pipe analogy, and where it breaks.' },
-      { id: 'filler-circ-2', title: 'Filler lesson: series and parallel', summary: 'Placeholder text. Two ways to wire, two very different outcomes.' },
+      { id: 'filler-circ-1', title: 'Current, voltage, and resistance', summary: 'Electric potential difference driving charge flow through a resistor.' },
+      { id: 'filler-circ-2', title: 'Ohm’s law and circuit loops', summary: 'Direct proportionality of current to potential difference at constant temperature.' },
     ],
   },
   {
@@ -71,6 +73,7 @@ export const FILLER_COURSES: Course[] = [
     summary: 'How sound travels, and why pitch and loudness are not the same thing — sample topic, not real course content yet.',
     equation: 'v = fλ',
     sketch: 'wave',
+    simulation: 'wave',
     lessons: [
       { id: 'filler-waves-1', title: 'Filler lesson: what a wave carries', summary: 'Placeholder text. Energy moves, the medium mostly stays put.' },
       { id: 'filler-waves-2', title: 'Filler lesson: frequency, amplitude, and hearing', summary: 'Placeholder text. Pitch comes from one, loudness from the other.' },
