@@ -11,6 +11,7 @@ import WaveSim from '../simulations/WaveSim'
 import RayOpticsSim from '../simulations/RayOpticsSim'
 import CircuitSim from '../simulations/CircuitSim'
 import MotionSim from '../simulations/MotionSim'
+import GnaniVoiceTutor from './GnaniVoiceTutor'
 import { getCourses, getCourseById, IS_FILLER_CONTENT } from '../content/courseSource'
 import type { Course } from '../content/types'
 
@@ -308,9 +309,9 @@ export function Home({ go }: { go: (v: View) => void }) {
               </li>
             ))}
           </ol>
-          <p className="mt-10 max-w-md text-sm leading-relaxed text-graphite">
-            Step 3 is being wired up right now — the voice tutor lands with the Gnani stack this week.
-          </p>
+          <div className="mt-12">
+            <GnaniVoiceTutor topicTitle="General Physics Foundations" classLevel="Class 9–12" />
+          </div>
         </Section>
 
         {/* ABOUT — short and honest */}
@@ -500,6 +501,14 @@ export function CoursePage({ id, go }: { id: string; go: (v: View) => void }) {
             </div>
           </section>
         )}
+
+        {/* Gnani AI Voice Tutor anchored to this course */}
+        <GnaniVoiceTutor
+          topicTitle={course.title}
+          classLevel={course.classLevel}
+          chapterTag={course.chapterTag}
+          equation={course.equation}
+        />
 
         {/* bottom back link — students can always get back */}
         <div className="mt-14 border-t border-ink/25 pt-8">

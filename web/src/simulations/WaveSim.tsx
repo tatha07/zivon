@@ -208,7 +208,7 @@ export default function WaveSim() {
           onClick={() => setPaused(!paused)}
           className="rounded-sm border border-ink/60 bg-paper px-3 py-1 font-notes text-xs font-bold text-ink hover:border-pen-blue hover:text-pen-blue"
         >
-          {paused ? '▶ Play' : '⏸ Pause'}
+          {paused ? 'Play' : 'Pause'}
         </button>
         <p className="font-hand text-base text-pen-blue">
           Notice: the blue dot only oscillates up and down — matter does not move forward with the wave!

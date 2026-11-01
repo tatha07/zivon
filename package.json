@@ -11,5 +11,8 @@
     "build": "npm run build --workspace=web",
     "lint": "npm run lint --workspace=web",
     "preview": "npm run preview --workspace=web"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6"
   }
 }
