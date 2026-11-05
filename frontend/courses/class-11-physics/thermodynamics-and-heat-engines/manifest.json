@@ -1,0 +1,32 @@
+{
+  "course_id": "class-11-physics",
+  "class": 11,
+  "topic_slug": "thermodynamics-and-heat-engines",
+  "title": "Thermodynamics & Heat Engines",
+  "chapter": {
+    "query": "Thermodynamics",
+    "title": "Thermodynamics & Heat Engines",
+    "book": "Physics Part II - Textbook for Class XI",
+    "domain": "Thermodynamics"
+  },
+  "sources": [
+    {
+      "id": "ncert-class-11",
+      "title": "Physics Part II - Textbook for Class XI",
+      "license": "NCERT (free educational use)"
+    }
+  ],
+  "run_id": "thermodynamics-and-heat-engines-c11",
+  "generated_at": "2026-11-05T18:50:14.362Z",
+  "block_counts": {
+    "text": 1,
+    "diagram": 1,
+    "simulation": 1,
+    "formula_breakdown": 1,
+    "comparison": 1,
+    "numerical_solver": 1,
+    "reveal": 1,
+    "worked_example": 1,
+    "check": 1
+  }
+}

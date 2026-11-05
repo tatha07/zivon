@@ -1,0 +1,32 @@
+{
+  "course_id": "class-12-physics",
+  "class": 12,
+  "topic_slug": "electric-charges-and-fields",
+  "title": "Electric Charges and Fields",
+  "chapter": {
+    "query": "Electric Charges and Fields",
+    "title": "Electric Charges and Fields",
+    "book": "Physics Part I - Textbook for Class XII",
+    "domain": "Electrostatics"
+  },
+  "sources": [
+    {
+      "id": "ncert-class-12",
+      "title": "Physics Part I - Textbook for Class XII",
+      "license": "NCERT (free educational use)"
+    }
+  ],
+  "run_id": "electric-charges-and-fields-c12",
+  "generated_at": "2026-11-05T18:50:14.355Z",
+  "block_counts": {
+    "text": 1,
+    "diagram": 1,
+    "simulation": 1,
+    "formula_breakdown": 1,
+    "comparison": 1,
+    "numerical_solver": 1,
+    "reveal": 1,
+    "worked_example": 1,
+    "check": 1
+  }
+}

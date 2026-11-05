@@ -1,0 +1,32 @@
+{
+  "course_id": "class-9-physics",
+  "class": 9,
+  "topic_slug": "sound-waves-and-propagation",
+  "title": "Sound Waves & Propagation",
+  "chapter": {
+    "query": "Sound",
+    "title": "Sound Waves & Propagation",
+    "book": "Science - Textbook for Grade 9 (2025 edition)",
+    "domain": "Waves"
+  },
+  "sources": [
+    {
+      "id": "ncert-class-9",
+      "title": "Science - Textbook for Grade 9 (2025 edition)",
+      "license": "NCERT (free educational use)"
+    }
+  ],
+  "run_id": "sound-waves-and-propagation-c9",
+  "generated_at": "2026-11-05T18:50:14.359Z",
+  "block_counts": {
+    "text": 1,
+    "diagram": 1,
+    "simulation": 1,
+    "formula_breakdown": 1,
+    "comparison": 1,
+    "numerical_solver": 1,
+    "reveal": 1,
+    "worked_example": 1,
+    "check": 1
+  }
+}

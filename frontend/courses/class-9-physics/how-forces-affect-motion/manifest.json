@@ -1,0 +1,32 @@
+{
+  "course_id": "class-9-physics",
+  "class": 9,
+  "topic_slug": "how-forces-affect-motion",
+  "title": "How Forces Affect Motion",
+  "chapter": {
+    "query": "Motion",
+    "title": "How Forces Affect Motion",
+    "book": "Science - Textbook for Grade 9 (2025 edition)",
+    "domain": "Mechanics"
+  },
+  "sources": [
+    {
+      "id": "ncert-class-9",
+      "title": "Science - Textbook for Grade 9 (2025 edition)",
+      "license": "NCERT (free educational use)"
+    }
+  ],
+  "run_id": "how-forces-affect-motion-c9",
+  "generated_at": "2026-11-05T18:50:14.331Z",
+  "block_counts": {
+    "text": 1,
+    "diagram": 1,
+    "simulation": 1,
+    "formula_breakdown": 1,
+    "comparison": 1,
+    "numerical_solver": 1,
+    "worked_example": 1,
+    "reveal": 1,
+    "check": 1
+  }
+}

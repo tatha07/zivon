@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zivon - Courses</title>
+<meta name="description" content="A voice-first AI tutor for Indian learners studying academic Physics.">
+<meta property="og:title" content="Zivon - Courses">
+<meta property="og:description" content="A voice-first AI tutor for Indian learners studying academic Physics.">
+<link rel="stylesheet" href="assets/zivon.css">
+</head>
+<body>
+<main class="zn-page zn-home">
+  <header class="zn-header">
+    <p class="zn-kicker">Zivon - Field Notes</p>
+    <h1 class="zn-title">Courses</h1>
+    <p class="zn-sub">Study pages generated from NCERT and open sources, one topic at a time.
+      Every page states its sources.</p>
+  </header>
+
+  <!-- Content Factory On-Demand Generator -->
+  <section class="zn-generator-box">
+    <h2 class="zn-gen-title">Generate Study Material</h2>
+    <p class="zn-gen-desc">Select a topic from below or enter any NCERT Physics chapter. The Zivon Content Factory will curate sources, synthesize core concepts, generate geometric diagrams, and build interactive canvas simulations.</p>
+    <form id="zn-gen-form" class="zn-gen-form">
+      <input type="text" id="zn-gen-chapter" class="zn-gen-input" placeholder="e.g. Light - Reflection & Refraction, Gravitation, Sound..." required>
+      <select id="zn-gen-class" class="zn-gen-select" aria-label="Select Class Level">
+        <option value="9">Class 9</option>
+        <option value="10">Class 10</option>
+        <option value="11">Class 11</option>
+        <option value="12">Class 12</option>
+      </select>
+      <select id="zn-gen-domain" class="zn-gen-select" aria-label="Select Physics Domain">
+        <option value="Mechanics">Mechanics</option>
+        <option value="Optics">Optics</option>
+        <option value="Electrostatics">Electrostatics & Electricity</option>
+        <option value="Waves">Waves & Oscillations</option>
+        <option value="Thermodynamics">Thermodynamics</option>
+      </select>
+      <button type="submit" class="zn-gen-submit">Generate Study Module</button>
+    </form>
+  </section>
+
+  <!-- Physics Domain and Class Filters -->
+  <section class="zn-explorer">
+    <div class="zn-filter-group">
+      <span class="zn-filter-label">Physics Domain:</span>
+      <div class="zn-filter-chips">
+        <button type="button" class="zn-chip-btn active" data-filter-domain="all">All Domains</button>
+        <button type="button" class="zn-chip-btn" data-filter-domain="mechanics">Mechanics</button>
+        <button type="button" class="zn-chip-btn" data-filter-domain="optics">Optics</button>
+        <button type="button" class="zn-chip-btn" data-filter-domain="electrostatics">Electrostatics & Current</button>
+        <button type="button" class="zn-chip-btn" data-filter-domain="waves">Waves & Sound</button>
+        <button type="button" class="zn-chip-btn" data-filter-domain="thermodynamics">Thermodynamics</button>
+      </div>
+    </div>
+
+    <div class="zn-filter-group">
+      <span class="zn-filter-label">Class Level:</span>
+      <div class="zn-filter-chips">
+        <button type="button" class="zn-chip-btn active" data-filter-class="all">All Classes (9–12)</button>
+        <button type="button" class="zn-chip-btn" data-filter-class="9">Class 9</button>
+        <button type="button" class="zn-chip-btn" data-filter-class="10">Class 10</button>
+        <button type="button" class="zn-chip-btn" data-filter-class="11">Class 11</button>
+        <button type="button" class="zn-chip-btn" data-filter-class="12">Class 12</button>
+      </div>
+    </div>
+
+    <!-- Dynamic Topic Explorer Grid -->
+    <ul id="zn-topic-grid" class="zn-topic-grid" aria-label="Physics curriculum topics"></ul>
+  </section>
+
+  <h2 style="font-family:var(--hand);font-size:32px;margin:48px 0 12px;">Published Library Index</h2>
+  <ul id="zn-courses" class="zn-courses" aria-label="Available courses"></ul>
+
+  <p id="zn-empty" class="zn-empty" hidden>
+    No topics yet - the content factory has not run. This page fills in automatically
+    after the first successful pipeline run.
+  </p>
+
+  <footer class="zn-footer">
+    <p class="zn-sources">Built in public for the Great Indian AI Internship Challenge.
+      Content is paraphrased from NCERT (free educational use) and openly licensed sources, with citations on every page.</p>
+  </footer>
+</main>
+<script src="courses.js"></script>
+<script src="assets/zivon.js"></script>
+</body>
+</html>

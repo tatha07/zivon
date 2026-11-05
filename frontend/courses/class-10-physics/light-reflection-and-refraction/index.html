@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; base-uri 'none'">
+<title>Light - Reflection and Refraction - Zivon Physics</title>
+<link rel="stylesheet" href="../../../assets/zivon.css">
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+<main class="zn-page">
+  <header class="zn-header">
+    <p class="zn-kicker"><a href="../../../index.html" style="text-decoration:none;color:inherit;">← Course Hub</a> · Class 10 Physics · Optics</p>
+    <h1 class="zn-title">Light - Reflection and Refraction</h1>
+    <p class="zn-objectives-label">Learning Objectives:</p>
+    <ul class="zn-objectives">
+      <li>Construct accurate geometric ray diagrams for convex and concave optical lenses.</li>
+      <li>Use the lens formula (1/f = 1/v - 1/u) and sign convention to calculate image distance and size.</li>
+      <li>Demonstrate Snell&#039;s law and determine conditions for Total Internal Reflection.</li>
+      <li>Differentiate between real inverted images and virtual erect images.</li>
+    </ul>
+  </header>
+
+  
+  <section class="zn-equations" style="margin:36px 0;">
+    <h3 style="font-family:var(--hand);font-size:28px;margin-bottom:12px;">Key Physics Formulas</h3>
+    
+      <div class="zn-eq-card" style="background:var(--paper-light);border:1px solid var(--ink);padding:14px;margin-bottom:12px;">
+        <code style="font-family:var(--notes);font-size:18px;font-weight:bold;color:var(--pen-blue);">1/f = 1/v - 1/u</code>
+        <p style="margin:4px 0 0;font-size:14px;color:var(--graphite);font-family:var(--notes);">Thin lens formula with Cartesian sign convention</p>
+      </div>
+      <div class="zn-eq-card" style="background:var(--paper-light);border:1px solid var(--ink);padding:14px;margin-bottom:12px;">
+        <code style="font-family:var(--notes);font-size:18px;font-weight:bold;color:var(--pen-blue);">n1 * sin(θ1) = n2 * sin(θ2)</code>
+        <p style="margin:4px 0 0;font-size:14px;color:var(--graphite);font-family:var(--notes);">Snell&#039;s law of refraction</p>
+      </div>
+  </section>
+
+  <section class="zn-text" id="b-01">
+    <p>When you look through a magnifying glass or camera lens, light rays refract at spherical glass surfaces. Depending on where the object stands relative to focal point F and center 2F, the image shifts dramatically.</p>
+    <p>Below is an authentic optical ray diagram illustrating the standard three principal rays forming a real inverted image.</p>
+  </section>
+
+  <figure class="zn-diagram" id="b-02">
+    <div class="zn-diagram-svg"><svg viewBox='0 0 440 240' aria-label='Ray diagram of convex lens forming real image'><line x1='10' y1='120' x2='430' y2='120' stroke='#5A5748' stroke-width='2' stroke-dasharray='4,4'/><path d='M 220 20 Q 240 120 220 220 Q 200 120 220 20 Z' fill='#F6F0CF' stroke='#1C1B18' stroke-width='2.5'/><circle cx='140' cy='120' r='3.5' fill='#1C1B18'/><text x='136' y='142' font-family='Caveat' font-size='18' font-weight='700'>2F₁</text><circle cx='180' cy='120' r='3.5' fill='#1C1B18'/><text x='178' y='142' font-family='Caveat' font-size='18' font-weight='700'>F₁</text><circle cx='220' cy='120' r='4' fill='#1F3A9E'/><text x='215' y='142' font-family='Caveat' font-size='18' font-weight='700' fill='#1F3A9E'>O</text><circle cx='260' cy='120' r='3.5' fill='#1C1B18'/><text x='256' y='142' font-family='Caveat' font-size='18' font-weight='700'>F₂</text><circle cx='300' cy='120' r='3.5' fill='#1C1B18'/><text x='294' y='142' font-family='Caveat' font-size='18' font-weight='700'>2F₂</text><line x1='110' y1='120' x2='110' y2='70' stroke='#1C1B18' stroke-width='3.5'/><polygon points='105,74 110,62 115,74' fill='#1C1B18'/><text x='96' y='60' font-family='Caveat' font-size='20' font-weight='700'>Object</text><line x1='110' y1='70' x2='220' y2='70' stroke='#1F3A9E' stroke-width='2.2'/><line x1='220' y1='70' x2='380' y2='205' stroke='#1F3A9E' stroke-width='2.2'/><line x1='110' y1='70' x2='380' y2='195' stroke='#1F3A9E' stroke-width='2.2'/><line x1='330' y1='120' x2='330' y2='170' stroke='#B3261E' stroke-width='3'/><polygon points='325,164 330,176 335,164' fill='#B3261E'/><text x='336' y='190' font-family='Caveat' font-size='20' font-weight='700' fill='#B3261E'>Real Image</text></svg></div>
+    <figcaption>Convex lens ray diagram: An object placed beyond 2F₁ forms a real, inverted, and diminished image between F₂ and 2F₂.</figcaption>
+  </figure>
+
+  <section class="zn-sim zn-sim-b-03" id="b-03" data-sim-id="b-03" aria-label="Interactive Optical Lens Bench Simulator">
+    <h3>Interactive Optical Lens Bench Simulator</h3>
+    <div class="zn-sim-controls">
+      <label class="zn-sim-control"><span>Object Distance u (cm)</span><input type="range" data-control="object_distance" min="10" max="70" step="2" value="36"><output>36</output></label>
+      <label class="zn-sim-control"><span>Focal Length f (cm)</span><input type="range" data-control="focal_length" min="10" max="30" step="1" value="18"><output>18</output></label>
+    </div>
+    <div class="zn-sim-canvas-wrap">
+      <canvas class="zn-sim-canvas" width="480" height="288" tabindex="0"></canvas>
+    </div>
+    <p class="zn-sim-desc">Drag the object distance slider and change lens focal length to watch the incident rays trace in real time, forming real or virtual images.</p>
+  </section>
+
+  <section class="zn-formula-breakdown" id="b-03-formula" aria-label="Thin Lens Equation &amp; Optical Magnification">
+    <div class="zn-formula-header">
+      <h4 class="zn-formula-title">Thin Lens Equation &amp; Optical Magnification</h4>
+      <div class="zn-formula-expr">1/f = 1/v - 1/u  ·  m = v/u</div>
+    </div>
+    <div class="zn-formula-terms">
+      
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">f</span><span class="zn-term-name">Focal Length</span></div>
+        <p class="zn-term-desc">Distance from optical center O to principal focus F (+ for convex, - for concave). <em>(SI: cm / meters)</em></p>
+      </div>
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">u</span><span class="zn-term-name">Object Distance</span></div>
+        <p class="zn-term-desc">Distance from optical center to object (- by Cartesian sign convention). <em>(SI: cm / meters)</em></p>
+      </div>
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">v</span><span class="zn-term-name">Image Distance</span></div>
+        <p class="zn-term-desc">Distance from optical center to image (+ for real image, - for virtual). <em>(SI: cm / meters)</em></p>
+      </div>
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">m</span><span class="zn-term-name">Linear Magnification</span></div>
+        <p class="zn-term-desc">Ratio of image height to object height (negative implies inverted). <em>(SI: Dimensionless)</em></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="zn-comparison-block" id="b-03-comparison" style="margin:28px 0;">
+    <h3 style="font-family:var(--hand);font-size:26px;margin:0 0 10px;">Spherical Lenses: Convex vs Concave Lenses</h3>
+    <table class="zn-comparison-table">
+      <thead>
+        <tr>
+          <th>Aspect</th>
+          <th>Convex (Converging) Lens</th>
+          <th>Concave (Diverging) Lens</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      <tr>
+        <td><strong>Physical Shape</strong></td>
+        <td>Thicker in the middle, thinner at edges</td>
+        <td>Thinner in the middle, thicker at edges</td>
+      </tr>
+      <tr>
+        <td><strong>Action on Rays</strong></td>
+        <td>Converges parallel incident light rays to real focus</td>
+        <td>Diverges parallel rays away from virtual focus</td>
+      </tr>
+      <tr>
+        <td><strong>Focal Length Sign</strong></td>
+        <td>Positive (+f)</td>
+        <td>Negative (-f)</td>
+      </tr>
+      <tr>
+        <td><strong>Image Formation</strong></td>
+        <td>Forms both real inverted and virtual erect images</td>
+        <td>Always forms diminished, erect, virtual images</td>
+      </tr>
+      <tr>
+        <td><strong>Common Applications</strong></td>
+        <td>Magnifying glasses, cameras, projectors, hypermetropia</td>
+        <td>Peepholes in doors, flashlights, myopia eyeglasses</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="zn-solver-box" id="b-03-solver" data-solver-type="optics-lens">
+    <h4 class="zn-solver-header">Interactive Thin Lens Formula Solver</h4>
+    <p class="zn-solver-problem">Input the object distance u and focal length f of a convex lens to calculate the precise image position v, image nature, and optical magnification m in real time.</p>
+    <div class="zn-solver-inputs">
+      
+      <label class="zn-solver-field">
+        <span>Object Distance u (cm)</span>
+        <input type="number" data-param="u" value="30" step="2">
+      </label>
+      <label class="zn-solver-field">
+        <span>Focal Length f (cm)</span>
+        <input type="number" data-param="f" value="15" step="1">
+      </label>
+    </div>
+    <div class="zn-solver-steps" id="steps-b-03-solver"></div>
+    <div class="zn-solver-result">Result: <span class="res-val" id="res-b-03-solver">-</span></div>
+  </section>
+
+  <section class="zn-reveal" id="b-03-derivation">
+    <h3>Step-by-Step Geometric Derivation of the Thin Lens Formula</h3>
+    <details class="zn-reveal-step"><summary>Step 1: Identify Similar Triangles with Optical Center</summary><p>Consider object AB and inverted image A&#039;B&#039; with optical center O. Right triangles ΔABO and ΔA&#039;B&#039;O are similar: A&#039;B&#039; / AB = OB&#039; / OB = v / (-u) = -v/u.</p></details>
+      <details class="zn-reveal-step"><summary>Step 2: Trace the Ray Parallel to Axis Through Focus</summary><p>Ray AD parallel to axis refracts through F₂. Triangles ΔODF₂ and ΔA&#039;B&#039;F₂ are similar (where OD = AB): A&#039;B&#039; / OD = A&#039;B&#039; / AB = B&#039;F₂ / OF₂.</p></details>
+      <details class="zn-reveal-step"><summary>Step 3: Express Distance B&#039;F₂</summary><p>B&#039;F₂ = OB&#039; - OF₂ = v - f. Thus: A&#039;B&#039; / AB = (v - f) / f.</p></details>
+      <details class="zn-reveal-step"><summary>Step 4: Equate Both Ratio Expressions</summary><p>v / (-u) = (v - f) / f &amp;rArr; -v/u = v/f - 1.</p></details>
+      <details class="zn-reveal-step"><summary>Step 5: Divide Both Sides by Image Distance v</summary><p>-1/u = 1/f - 1/v &amp;rArr; 1/f = 1/v - 1/u. This is the celebrated Gaussian thin lens formula.</p></details>
+  </section>
+
+  <section class="zn-example" id="b-04">
+    <h3>Worked Example</h3>
+    <p class="zn-example-problem">A convex lens has a focal length of 15 cm. At what distance should an object 4 cm tall be placed from the optical center so that a real, inverted image is formed at a distance of 30 cm on the other side? Also calculate the image height.</p>
+    <ol>
+      <li><strong>Identify Given Values with Signs</strong> f = +15 cm (convex lens), v = +30 cm (real image on other side), h_o = 4 cm. We need u and h_i.</li>
+      <li><strong>Apply Lens Formula 1/f = 1/v - 1/u</strong> 1/u = 1/v - 1/f = 1/30 - 1/15 = 1/30 - 2/30 = -1/30. Therefore, u = -30 cm.</li>
+      <li><strong>Compute Magnification m = v / u = h_i / h_o</strong> m = (+30 cm) / (-30 cm) = -1.0. Thus, h_i = m · h_o = -1.0 · 4 cm = -4 cm.</li>
+    </ol>
+    <p class="zn-answer"><span class="zn-answer-label">Answer:</span> The object must be placed at 30 cm in front of the lens (u = -30 cm, at 2F). The image is 4 cm tall and inverted.</p>
+  </section>
+
+  <fieldset class="zn-check" id="b-05" data-format="mcq" data-answer-index="1">
+    <legend>Where should an object be placed in front of a convex lens to get a real image of the same size as the object?</legend>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="0"> <span>At the principal focus F</span></label>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="1"> <span>At twice the focal length 2F</span></label>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="2"> <span>At infinity</span></label>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="3"> <span>Between the optical centre and principal focus</span></label>
+    <button type="button" class="zn-check-btn">Check</button>
+    <p class="zn-check-feedback" aria-live="polite"></p>
+    <details class="zn-check-why"><summary>Why?</summary><p>When placed at 2F, 1/v = 1/f - 1/(2f) = 1/(2f), so v = 2F. Magnification m = -v/u = -2F/2F = -1, meaning identical size.</p></details>
+  </fieldset>
+
+  
+  <section class="zn-misconceptions" style="margin:36px 0;background:var(--paper-light);border:1px solid var(--ink);padding:18px;">
+    <h3 style="font-family:var(--hand);font-size:28px;margin-top:0;">Common Student Misconceptions</h3>
+    <ul style="list-style:none;padding:0;">
+      <li style="margin-bottom:12px;font-family:var(--notes);font-size:15px;line-height:24px;">
+        <span style="color:var(--pencil-red);font-weight:bold;border:1px solid var(--pencil-red);padding:2px 6px;margin-right:8px;">MYTH</span>Rays bend towards the medium surface during refraction.<br>
+        <span style="color:var(--tick-green);font-weight:bold;border:1px solid var(--tick-green);padding:2px 6px;margin-right:8px;">REALITY</span>Rays bend towards the NORMAL when entering an optically denser medium, not towards the interface.
+      </li></ul>
+  </section>
+
+  <section class="zn-glossary">
+    <h2>Glossary of Terms</h2>
+    <dl>
+      <dt>Focal Length (f)</dt><dd>Distance between optical centre O and principal focus F of the lens.</dd>
+      <dt>Real Image</dt><dd>An image formed by the actual intersection of light rays, which can be captured on a screen.</dd>
+      <dt>Virtual Image</dt><dd>An image formed where rays only appear to diverge from, which cannot be captured on a screen.</dd>
+    </dl>
+  </section>
+
+  <footer class="zn-footer">
+    <p class="zn-sources">Generated by the Zivon content factory. Sources: Science - Textbook for Class X. Certified for educational use.</p>
+  </footer>
+</main>
+<script src="../../../assets/zivon.js"></script>
+<script src="page.js"></script>
+</body>
+</html>
