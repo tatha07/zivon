@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; base-uri 'none'">
+<title>Electric Charges and Fields - Zivon Physics</title>
+<link rel="stylesheet" href="../../../assets/zivon.css">
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+<main class="zn-page">
+  <header class="zn-header">
+    <p class="zn-kicker"><a href="../../../index.html" style="text-decoration:none;color:inherit;">← Course Hub</a> · Class 12 Physics · Electrostatics</p>
+    <h1 class="zn-title">Electric Charges and Fields</h1>
+    <p class="zn-objectives-label">Learning Objectives:</p>
+    <ul class="zn-objectives">
+      <li>State and compute electrostatic attraction and repulsion forces using Coulomb&#039;s Law.</li>
+      <li>Map and interpret electric field lines surrounding single charges and dipoles.</li>
+      <li>Calculate electric field intensity at varying distances.</li>
+      <li>Solve numerical problems involving electrostatic force equilibrium.</li>
+    </ul>
+  </header>
+
+  
+  <section class="zn-equations" style="margin:36px 0;">
+    <h3 style="font-family:var(--hand);font-size:28px;margin-bottom:12px;">Key Physics Formulas</h3>
+    
+      <div class="zn-eq-card" style="background:var(--paper-light);border:1px solid var(--ink);padding:14px;margin-bottom:12px;">
+        <code style="font-family:var(--notes);font-size:18px;font-weight:bold;color:var(--pen-blue);">F = (1 / 4πε₀) * (|q1 * q2| / r²)</code>
+        <p style="margin:4px 0 0;font-size:14px;color:var(--graphite);font-family:var(--notes);">Coulomb&#039;s Law electrostatic force</p>
+      </div>
+      <div class="zn-eq-card" style="background:var(--paper-light);border:1px solid var(--ink);padding:14px;margin-bottom:12px;">
+        <code style="font-family:var(--notes);font-size:18px;font-weight:bold;color:var(--pen-blue);">E = F / q0</code>
+        <p style="margin:4px 0 0;font-size:14px;color:var(--graphite);font-family:var(--notes);">Electric field strength</p>
+      </div>
+  </section>
+
+  <section class="zn-text" id="b-01">
+    <p>Rubbing a glass rod with silk leaves the glass positively charged by losing electrons. Bring it near a suspended charged rod, and they exert forces across empty space.</p>
+    <p>Michael Faraday introduced electric field lines to map this invisible force field: lines stream out from positive charges and terminate upon negative charges.</p>
+  </section>
+
+  <figure class="zn-diagram" id="b-02">
+    <div class="zn-diagram-svg"><svg viewBox='0 0 380 220' aria-label='Electric dipole field lines'><circle cx='120' cy='110' r='20' fill='#B3261E'/><text x='120' y='116' fill='#F6F0CF' font-family='Arial' font-size='22' font-weight='bold' text-anchor='middle'>+</text><text x='120' y='148' fill='#B3261E' font-family='Caveat' font-size='20' font-weight='700' text-anchor='middle'>+q</text><circle cx='260' cy='110' r='20' fill='#1F3A9E'/><text x='260' y='116' fill='#F6F0CF' font-family='Arial' font-size='22' font-weight='bold' text-anchor='middle'>−</text><text x='260' y='148' fill='#1F3A9E' font-family='Caveat' font-size='20' font-weight='700' text-anchor='middle'>−q</text><path d='M 140 110 L 240 110' stroke='#1C1B18' stroke-width='2.2'/><polygon points='194,106 204,110 194,114' fill='#1C1B18'/><path d='M 136 94 Q 190 40 244 94' fill='none' stroke='#1C1B18' stroke-width='2'/><polygon points='194,62 204,67 196,73' fill='#1C1B18'/><path d='M 136 126 Q 190 180 244 126' fill='none' stroke='#1C1B18' stroke-width='2'/><polygon points='196,147 204,153 194,158' fill='#1C1B18'/></svg></div>
+    <figcaption>Electric dipole: Electric field lines diverge outward from positive charge (+q) and converge inward into negative charge (-q).</figcaption>
+  </figure>
+
+  <section class="zn-sim zn-sim-b-03" id="b-03" data-sim-id="b-03" aria-label="Interactive Coulomb Force &amp; Field Lab">
+    <h3>Interactive Coulomb Force &amp; Field Lab</h3>
+    <div class="zn-sim-controls">
+      <label class="zn-sim-control"><span>Charge q₁ (μC)</span><input type="range" data-control="charge_q1" min="-10" max="10" step="1" value="5"><output>5</output></label>
+      <label class="zn-sim-control"><span>Charge q₂ (μC)</span><input type="range" data-control="charge_q2" min="-10" max="10" step="1" value="-5"><output>-5</output></label>
+      <label class="zn-sim-control"><span>Separation r (m)</span><input type="range" data-control="separation_r" min="1" max="8" step="0.5" value="3"><output>3</output></label>
+    </div>
+    <div class="zn-sim-canvas-wrap">
+      <canvas class="zn-sim-canvas" width="480" height="288" tabindex="0"></canvas>
+    </div>
+    <p class="zn-sim-desc">Change charge magnitudes q1 and q2 and adjust separation distance to observe attractive/repulsive force vectors.</p>
+  </section>
+
+  <section class="zn-formula-breakdown" id="b-03-formula" aria-label="Coulomb&#039;s Law &amp; Electric Field Intensity Breakdown">
+    <div class="zn-formula-header">
+      <h4 class="zn-formula-title">Coulomb&#039;s Law &amp; Electric Field Intensity Breakdown</h4>
+      <div class="zn-formula-expr">F = (1 / 4πε₀) · (|q₁ · q₂| / r²)  ·  E = F / q₀</div>
+    </div>
+    <div class="zn-formula-terms">
+      
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">F</span><span class="zn-term-name">Electrostatic Force</span></div>
+        <p class="zn-term-desc">Mutual attraction or repulsion exerted along the line between centers. <em>(SI: Newtons (N))</em></p>
+      </div>
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">q₁, q₂</span><span class="zn-term-name">Point Charges</span></div>
+        <p class="zn-term-desc">Quantity of electric charge on each particle. <em>(SI: Coulombs (C))</em></p>
+      </div>
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">r</span><span class="zn-term-name">Separation Distance</span></div>
+        <p class="zn-term-desc">Center-to-center distance separating the two point charges. <em>(SI: Meters (m))</em></p>
+      </div>
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">k</span><span class="zn-term-name">Coulomb Constant</span></div>
+        <p class="zn-term-desc">1 / (4πε₀) ≈ 8.99 × 10⁹ N·m²/C² in vacuum. <em>(SI: N·m²/C²)</em></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="zn-comparison-block" id="b-03-comparison" style="margin:28px 0;">
+    <h3 style="font-family:var(--hand);font-size:26px;margin:0 0 10px;">Fundamental Forces: Electrostatic vs Gravitational Force</h3>
+    <table class="zn-comparison-table">
+      <thead>
+        <tr>
+          <th>Aspect</th>
+          <th>Electrostatic Force (Coulomb)</th>
+          <th>Gravitational Force (Newton)</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      <tr>
+        <td><strong>Interaction Nature</strong></td>
+        <td>Both attractive (unlike charges) and repulsive (like charges)</td>
+        <td>Strictly attractive only (mass is always positive)</td>
+      </tr>
+      <tr>
+        <td><strong>Relative Strength</strong></td>
+        <td>Enormously strong (~10³⁶ times stronger than gravity between protons)</td>
+        <td>Extremely weak (only dominant at planetary/astronomical scales)</td>
+      </tr>
+      <tr>
+        <td><strong>Medium Dependence</strong></td>
+        <td>Heavily depends on intervening dielectric medium (F_med = F_vac / K)</td>
+        <td>Completely independent of medium between masses</td>
+      </tr>
+      <tr>
+        <td><strong>Distance Law</strong></td>
+        <td>Obeys strict Inverse Square Law (1 / r²)</td>
+        <td>Obeys strict Inverse Square Law (1 / r²)</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="zn-solver-box" id="b-03-solver" data-solver-type="electrostatics-coulomb">
+    <h4 class="zn-solver-header">Interactive Coulomb Force Calculator</h4>
+    <p class="zn-solver-problem">Input charges q₁ and q₂ in micro-Coulombs (μC) and separation distance r in meters to calculate the magnitude and attractive/repulsive nature of the electrostatic force.</p>
+    <div class="zn-solver-inputs">
+      
+      <label class="zn-solver-field">
+        <span>Charge q₁ (μC)</span>
+        <input type="number" data-param="q1" value="2" step="0.5">
+      </label>
+      <label class="zn-solver-field">
+        <span>Charge q₂ (μC)</span>
+        <input type="number" data-param="q2" value="3" step="0.5">
+      </label>
+      <label class="zn-solver-field">
+        <span>Separation r (m)</span>
+        <input type="number" data-param="r" value="0.3" step="0.05">
+      </label>
+    </div>
+    <div class="zn-solver-steps" id="steps-b-03-solver"></div>
+    <div class="zn-solver-result">Result: <span class="res-val" id="res-b-03-solver">-</span></div>
+  </section>
+
+  <section class="zn-reveal" id="b-03-derivation">
+    <h3>Step-by-Step Derivation: Electric Potential Due to an Isolated Point Charge</h3>
+    <details class="zn-reveal-step"><summary>Step 1: Work Definition in Electric Field</summary><p>Electric potential V at distance r is the external work required to bring a unit positive test charge (+q₀) from infinity to r without acceleration: V = - ∫ [∞ to r] E · dr.</p></details>
+      <details class="zn-reveal-step"><summary>Step 2: Express Radial Field Intensity</summary><p>The electric field of charge Q is directed radially outward: E(x) = (1 / 4πε₀) · (Q / x²).</p></details>
+      <details class="zn-reveal-step"><summary>Step 3: Evaluate the Definite Integral</summary><p>W = - ∫ [∞ to r] (k·Q / x²) dx = - k·Q · [-1/x] [∞ to r] = k·Q · (1/r - 1/∞) = k·Q / r.</p></details>
+      <details class="zn-reveal-step"><summary>Step 4: Final Potential Expression</summary><p>V = (1 / 4πε₀) · (Q / r). Electric potential falls off as 1/r, whereas electric field falls off as 1/r².</p></details>
+  </section>
+
+  <section class="zn-example" id="b-04">
+    <h3>Worked Example</h3>
+    <p class="zn-example-problem">Two small conducting spheres placed in air at a distance of 30 cm carry charges of 2 × 10⁻⁷ C and 3 × 10⁻⁷ C respectively. What is the electrostatic force between them?</p>
+    <ol>
+      <li><strong>Identify Parameters</strong> q₁ = 2 × 10⁻⁷ C, q₂ = 3 × 10⁻⁷ C, r = 30 cm = 0.3 m, k = 9 × 10⁹ N·m²/C².</li>
+      <li><strong>Apply Coulomb&#039;s Formula</strong> F = k · (q₁ · q₂) / r² = (9 × 10⁹) · (2 × 10⁻⁷ · 3 × 10⁻⁷) / (0.3)²</li>
+      <li><strong>Calculate Resultant</strong> F = (9 × 6 × 10⁻⁵) / (0.09) = 54 × 10⁻⁵ / 0.09 = 6 × 10⁻³ N = 0.006 N.</li>
+    </ol>
+    <p class="zn-answer"><span class="zn-answer-label">Answer:</span> F = 6 × 10⁻³ N (repulsive, since both charges are positive).</p>
+  </section>
+
+  <fieldset class="zn-check" id="b-05" data-format="mcq" data-answer-index="2">
+    <legend>If the distance between two stationary point charges is halved, by what factor does the electrostatic force between them change?</legend>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="0"> <span>Halved (1/2×)</span></label>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="1"> <span>Doubled (2×)</span></label>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="2"> <span>Quadrupled (4×)</span></label>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="3"> <span>Remains unchanged</span></label>
+    <button type="button" class="zn-check-btn">Check</button>
+    <p class="zn-check-feedback" aria-live="polite"></p>
+    <details class="zn-check-why"><summary>Why?</summary><p>According to Coulomb&#039;s Law F ∝ 1/r². Halving r to r/2 gives 1/(r/2)² = 4/r², quadrupling the force.</p></details>
+  </fieldset>
+
+  
+  <section class="zn-misconceptions" style="margin:36px 0;background:var(--paper-light);border:1px solid var(--ink);padding:18px;">
+    <h3 style="font-family:var(--hand);font-size:28px;margin-top:0;">Common Student Misconceptions</h3>
+    <ul style="list-style:none;padding:0;">
+      <li style="margin-bottom:12px;font-family:var(--notes);font-size:15px;line-height:24px;">
+        <span style="color:var(--pencil-red);font-weight:bold;border:1px solid var(--pencil-red);padding:2px 6px;margin-right:8px;">MYTH</span>Electric field lines represent physical wires or tracks in space.<br>
+        <span style="color:var(--tick-green);font-weight:bold;border:1px solid var(--tick-green);padding:2px 6px;margin-right:8px;">REALITY</span>Field lines are geometric representations of field vector directions; space between lines is continuous.
+      </li></ul>
+  </section>
+
+  <section class="zn-glossary">
+    <h2>Glossary of Terms</h2>
+    <dl>
+      <dt>Coulomb (C)</dt><dd>SI unit of electric charge.</dd>
+      <dt>Permittivity (ε₀)</dt><dd>Measure of the resistance encountered when forming an electric field in a vacuum (8.854 × 10⁻¹² C²/N·m²).</dd>
+    </dl>
+  </section>
+
+  <footer class="zn-footer">
+    <p class="zn-sources">Generated by the Zivon content factory. Sources: Physics Part I - Textbook for Class XII. Certified for educational use.</p>
+  </footer>
+</main>
+<script src="../../../assets/zivon.js"></script>
+<script src="page.js"></script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; base-uri 'none'">
+<title>Thermodynamics &amp; Heat Engines - Zivon Physics</title>
+<link rel="stylesheet" href="../../../assets/zivon.css">
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+<main class="zn-page">
+  <header class="zn-header">
+    <p class="zn-kicker"><a href="../../../index.html" style="text-decoration:none;color:inherit;">← Course Hub</a> · Class 11 Physics · Thermodynamics</p>
+    <h1 class="zn-title">Thermodynamics &amp; Heat Engines</h1>
+    <p class="zn-objectives-label">Learning Objectives:</p>
+    <ul class="zn-objectives">
+      <li>Formulate and apply the First Law of Thermodynamics (ΔQ = ΔU + ΔW) to physical systems.</li>
+      <li>Interpret Pressure-Volume (PV) indicator diagrams and calculate work done as area.</li>
+      <li>Explain microscopic gas pressure as molecular collisions with container walls.</li>
+      <li>Analyze isothermal, isobaric, isochoric, and adiabatic gas processes.</li>
+    </ul>
+  </header>
+
+  
+  <section class="zn-equations" style="margin:36px 0;">
+    <h3 style="font-family:var(--hand);font-size:28px;margin-bottom:12px;">Key Physics Formulas</h3>
+    
+      <div class="zn-eq-card" style="background:var(--paper-light);border:1px solid var(--ink);padding:14px;margin-bottom:12px;">
+        <code style="font-family:var(--notes);font-size:18px;font-weight:bold;color:var(--pen-blue);">ΔQ = ΔU + ΔW</code>
+        <p style="margin:4px 0 0;font-size:14px;color:var(--graphite);font-family:var(--notes);">First Law of Thermodynamics</p>
+      </div>
+      <div class="zn-eq-card" style="background:var(--paper-light);border:1px solid var(--ink);padding:14px;margin-bottom:12px;">
+        <code style="font-family:var(--notes);font-size:18px;font-weight:bold;color:var(--pen-blue);">P * V = n * R * T</code>
+        <p style="margin:4px 0 0;font-size:14px;color:var(--graphite);font-family:var(--notes);">Ideal Gas State Equation</p>
+      </div>
+  </section>
+
+  <section class="zn-text" id="b-01">
+    <p>When you compress gas in a bicycle pump rapidly, the pump barrel warms up. You performed mechanical work on the gas, elevating its internal energy without supplying heat.</p>
+    <p>The First Law of Thermodynamics captures this bookkeeping: Heat added = Increase in internal energy + Work done by expansion.</p>
+  </section>
+
+  <figure class="zn-diagram" id="b-02">
+    <div class="zn-diagram-svg"><svg viewBox='0 0 380 220' aria-label='Gas cylinder with piston'><rect x='80' y='40' width='220' height='130' fill='#F6F0CF' stroke='#1C1B18' stroke-width='3'/><rect x='210' y='42' width='16' height='126' fill='#5A5748' stroke='#1C1B18' stroke-width='2'/><rect x='226' y='96' width='100' height='18' fill='#5A5748'/><circle cx='120' cy='70' r='5' fill='#1F3A9E'/><circle cx='150' cy='120' r='5' fill='#1F3A9E'/><circle cx='170' cy='80' r='5' fill='#1F3A9E'/><circle cx='130' cy='140' r='5' fill='#1F3A9E'/><circle cx='180' cy='130' r='5' fill='#1F3A9E'/><text x='140' y='105' fill='#1F3A9E' font-family='Caveat' font-size='22' font-weight='700'>Gas: P, V, T</text><line x1='330' y1='105' x2='270' y2='105' stroke='#B3261E' stroke-width='3'/><polygon points='278,99 266,105 278,111' fill='#B3261E'/><text x='300' y='88' fill='#B3261E' font-family='Caveat' font-size='20' font-weight='700'>Compress (W)</text></svg></div>
+    <figcaption>Thermodynamic cylinder with movable piston containing gas molecules at pressure P, volume V, and temperature T.</figcaption>
+  </figure>
+
+  <section class="zn-sim zn-sim-b-03" id="b-03" data-sim-id="b-03" aria-label="Interactive Gas Piston &amp; PV Lab">
+    <h3>Interactive Gas Piston &amp; PV Lab</h3>
+    <div class="zn-sim-controls">
+      <label class="zn-sim-control"><span>Temperature T (K)</span><input type="range" data-control="temperature" min="100" max="600" step="20" value="300"><output>300</output></label>
+      <label class="zn-sim-control"><span>Volume V (liters)</span><input type="range" data-control="volume" min="1" max="5" step="0.2" value="3"><output>3</output></label>
+    </div>
+    <div class="zn-sim-canvas-wrap">
+      <canvas class="zn-sim-canvas" width="480" height="288" tabindex="0"></canvas>
+    </div>
+    <p class="zn-sim-desc">Adjust temperature and piston volume to watch gas molecules speed up and pressure gauge respond according to PV = nRT.</p>
+  </section>
+
+  <section class="zn-formula-breakdown" id="b-03-formula" aria-label="First Law of Thermodynamics &amp; Ideal Gas Law">
+    <div class="zn-formula-header">
+      <h4 class="zn-formula-title">First Law of Thermodynamics &amp; Ideal Gas Law</h4>
+      <div class="zn-formula-expr">ΔQ = ΔU + ΔW  ·  P · V = n · R · T</div>
+    </div>
+    <div class="zn-formula-terms">
+      
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">ΔQ</span><span class="zn-term-name">Heat Exchanged</span></div>
+        <p class="zn-term-desc">Thermal energy transferred across system boundary (+ when absorbed, - when released). <em>(SI: Joules (J))</em></p>
+      </div>
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">ΔU</span><span class="zn-term-name">Internal Energy Change</span></div>
+        <p class="zn-term-desc">Change in total kinetic energy of chaotic molecular motion (ΔU = n C_v ΔT). <em>(SI: Joules (J))</em></p>
+      </div>
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">ΔW</span><span class="zn-term-name">Thermodynamic Work</span></div>
+        <p class="zn-term-desc">Mechanical work performed by expanding gas (ΔW = P · ΔV). <em>(SI: Joules (J))</em></p>
+      </div>
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">P, V, T</span><span class="zn-term-name">State Variables</span></div>
+        <p class="zn-term-desc">Pressure (Pa), Volume (m³), and absolute Temperature (Kelvin). <em>(SI: Pa, m³, K)</em></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="zn-comparison-block" id="b-03-comparison" style="margin:28px 0;">
+    <h3 style="font-family:var(--hand);font-size:26px;margin:0 0 10px;">Thermodynamic Transformations: Isothermal vs Adiabatic Processes</h3>
+    <table class="zn-comparison-table">
+      <thead>
+        <tr>
+          <th>Aspect</th>
+          <th>Isothermal Process</th>
+          <th>Adiabatic Process</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      <tr>
+        <td><strong>Constrained Condition</strong></td>
+        <td>Temperature remains strictly constant (ΔT = 0, ΔU = 0)</td>
+        <td>Zero heat exchange with surroundings (ΔQ = 0)</td>
+      </tr>
+      <tr>
+        <td><strong>First Law Balance</strong></td>
+        <td>All heat absorbed turns into work: ΔQ = ΔW</td>
+        <td>Work is done entirely at cost of internal energy: ΔW = -ΔU</td>
+      </tr>
+      <tr>
+        <td><strong>Governing Equation</strong></td>
+        <td>P · V = Constant (Boyle&#039;s Law curve)</td>
+        <td>P · V^γ = Constant (steeper curve, γ = C_p / C_v)</td>
+      </tr>
+      <tr>
+        <td><strong>Physical Execution</strong></td>
+        <td>Very slow process conducted in highly thermally conductive container</td>
+        <td>Very rapid process conducted in heavily insulated container</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="zn-solver-box" id="b-03-solver" data-solver-type="thermo-first-law">
+    <h4 class="zn-solver-header">Interactive First Law Energy Balance Calculator</h4>
+    <p class="zn-solver-problem">Input heat supplied ΔQ in Joules and work done by the gas ΔW in Joules to calculate the change in internal energy ΔU and temperature effect.</p>
+    <div class="zn-solver-inputs">
+      
+      <label class="zn-solver-field">
+        <span>Heat Absorbed ΔQ (J)</span>
+        <input type="number" data-param="Q" value="500" step="25">
+      </label>
+      <label class="zn-solver-field">
+        <span>Work Done ΔW (J)</span>
+        <input type="number" data-param="W" value="200" step="25">
+      </label>
+    </div>
+    <div class="zn-solver-steps" id="steps-b-03-solver"></div>
+    <div class="zn-solver-result">Result: <span class="res-val" id="res-b-03-solver">-</span></div>
+  </section>
+
+  <section class="zn-reveal" id="b-03-derivation">
+    <h3>Step-by-Step Derivation: Work Done in an Isothermal Gas Expansion</h3>
+    <details class="zn-reveal-step"><summary>Step 1: Infinitesimal Work Definition</summary><p>When a gas expands against an external pressure P by small volume dV, the work done is: dW = P · dV.</p></details>
+      <details class="zn-reveal-step"><summary>Step 2: Express Pressure from Ideal Gas Law</summary><p>Since P·V = n·R·T, express pressure as a function of volume: P(V) = (n·R·T) / V.</p></details>
+      <details class="zn-reveal-step"><summary>Step 3: Integrate from Initial Volume V₁ to Final Volume V₂</summary><p>W = ∫ [V₁ to V₂] P dV = ∫ [V₁ to V₂] (n·R·T / V) dV.</p></details>
+      <details class="zn-reveal-step"><summary>Step 4: Factor Out Constant Temperature T</summary><p>Since temperature is constant in an isothermal process: W = n·R·T ∫ [V₁ to V₂] (1 / V) dV = n·R·T [ln(V)] [V₁ to V₂].</p></details>
+      <details class="zn-reveal-step"><summary>Step 5: Final Isothermal Work Expression</summary><p>W = n · R · T · ln(V₂ / V₁) = 2.303 · n · R · T · log₁₀(V₂ / V₁). When V₂ &gt; V₁, W is positive (gas does work).</p></details>
+  </section>
+
+  <section class="zn-example" id="b-04">
+    <h3>Worked Example</h3>
+    <p class="zn-example-problem">An ideal gas system absorbs 500 J of heat from its surroundings. If the gas expands and performs 200 J of work against a piston, calculate the change in its internal energy.</p>
+    <ol>
+      <li><strong>Identify First Law of Thermodynamics</strong> ΔQ = ΔU + ΔW, where ΔQ = +500 J (heat added) and ΔW = +200 J (work done by gas).</li>
+      <li><strong>Rearrange for Change in Internal Energy ΔU</strong> ΔU = ΔQ - ΔW = 500 J - 200 J = +300 J.</li>
+      <li><strong>Physical Interpretation</strong> The internal energy of the gas increased by 300 J, which elevates its temperature.</li>
+    </ol>
+    <p class="zn-answer"><span class="zn-answer-label">Answer:</span> ΔU = +300 J (internal energy increases by 300 Joules).</p>
+  </section>
+
+  <fieldset class="zn-check" id="b-05" data-format="mcq" data-answer-index="0">
+    <legend>In an isothermal expansion of an ideal gas, which of the following is strictly true?</legend>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="0"> <span>Internal energy change is zero (ΔU = 0)</span></label>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="1"> <span>Work done is zero (ΔW = 0)</span></label>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="2"> <span>Heat exchanged is zero (ΔQ = 0)</span></label>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="3"> <span>Pressure remains constant</span></label>
+    <button type="button" class="zn-check-btn">Check</button>
+    <p class="zn-check-feedback" aria-live="polite"></p>
+    <details class="zn-check-why"><summary>Why?</summary><p>For an ideal gas, internal energy depends only on temperature. Since isothermal means constant temperature (ΔT = 0), ΔU = 0, so ΔQ = ΔW.</p></details>
+  </fieldset>
+
+  
+  <section class="zn-misconceptions" style="margin:36px 0;background:var(--paper-light);border:1px solid var(--ink);padding:18px;">
+    <h3 style="font-family:var(--hand);font-size:28px;margin-top:0;">Common Student Misconceptions</h3>
+    <ul style="list-style:none;padding:0;">
+      <li style="margin-bottom:12px;font-family:var(--notes);font-size:15px;line-height:24px;">
+        <span style="color:var(--pencil-red);font-weight:bold;border:1px solid var(--pencil-red);padding:2px 6px;margin-right:8px;">MYTH</span>Heat and temperature are the same physical quantity.<br>
+        <span style="color:var(--tick-green);font-weight:bold;border:1px solid var(--tick-green);padding:2px 6px;margin-right:8px;">REALITY</span>Temperature is a measure of average molecular kinetic energy; heat is thermal energy in transit between systems.
+      </li></ul>
+  </section>
+
+  <section class="zn-glossary">
+    <h2>Glossary of Terms</h2>
+    <dl>
+      <dt>Joule (J)</dt><dd>SI unit of work and energy.</dd>
+      <dt>Adiabatic</dt><dd>A thermodynamic process in which no heat enters or leaves the system (ΔQ = 0).</dd>
+    </dl>
+  </section>
+
+  <footer class="zn-footer">
+    <p class="zn-sources">Generated by the Zivon content factory. Sources: Physics Part II - Textbook for Class XI. Certified for educational use.</p>
+  </footer>
+</main>
+<script src="../../../assets/zivon.js"></script>
+<script src="page.js"></script>
+</body>
+</html>

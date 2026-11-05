@@ -5,8 +5,8 @@
 | K8s object | Semantics | Zivon mapping |
 |---|---|---|
 | Pod | Smallest unit: 1+ containers sharing network/volumes | any running container |
-| **Job** | Run a pod **to completion**, retry per `backoffLimit`, then done | **content factory** (batch pipeline) ✅ |
-| **Deployment + Service** | Keep N replicas running forever; stable internal address | **frontend (nginx)** ✅, voice backend (Phase 2) |
+| **Job** | Run a pod **to completion**, retry per `backoffLimit`, then done | **content factory** (batch pipeline) [DONE] |
+| **Deployment + Service** | Keep N replicas running forever; stable internal address | **frontend (nginx)** [DONE], voice backend (Phase 2) |
 | Namespace | Name isolation | `zivon` |
 | Secret / ConfigMap | Runtime config & credentials | `ZIVON_API_KEY` at runtime — never in manifests |
 

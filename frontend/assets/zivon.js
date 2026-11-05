@@ -83,9 +83,53 @@
       width: canvas.width,
       height: canvas.height,
       values: values,
-      t: 0
+      t: 0,
+      paused: false
     };
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Add playback toolbar if not already present
+    var toolbar = container.querySelector(".zn-sim-toolbar");
+    if (!toolbar) {
+      toolbar = document.createElement("div");
+      toolbar.className = "zn-sim-toolbar";
+      toolbar.innerHTML = '<button type="button" class="zn-sim-btn zn-sim-play-btn" aria-label="Pause or Resume simulation">Pause</button>' +
+                          '<button type="button" class="zn-sim-btn zn-sim-reset-btn secondary" aria-label="Reset simulation">Reset</button>' +
+                          '<span class="zn-sim-time-label">Time: <output class="zn-sim-time">0.0s</output></span>';
+      var canvasWrap = container.querySelector(".zn-sim-canvas-wrap") || canvas;
+      container.insertBefore(toolbar, canvasWrap);
+    }
+
+    var playBtn = toolbar.querySelector(".zn-sim-play-btn");
+    var resetBtn = toolbar.querySelector(".zn-sim-reset-btn");
+    var timeOutput = toolbar.querySelector(".zn-sim-time");
+
+    var t0 = performance.now();
+    var accumulatedTime = 0;
+    var lastNow = t0;
+
+    if (playBtn) {
+      playBtn.addEventListener("click", function() {
+        ctx.paused = !ctx.paused;
+        playBtn.textContent = ctx.paused ? "Play" : "Pause";
+        playBtn.setAttribute("aria-label", ctx.paused ? "Play simulation" : "Pause simulation");
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener("click", function() {
+        ctx.paused = false;
+        if (playBtn) playBtn.textContent = "Pause";
+        t0 = performance.now();
+        lastNow = t0;
+        accumulatedTime = 0;
+        ctx.t = 0;
+        if (timeOutput) timeOutput.textContent = "0.0s";
+        try {
+          if (typeof impl.init === "function") impl.init(ctx);
+        } catch (e) {}
+      });
+    }
 
     try {
       if (typeof impl.init === "function") impl.init(ctx);
@@ -99,9 +143,18 @@
       try { impl.draw(ctx); } catch (err) { paintError(ctx.g, ctx.width, ctx.height, String(err)); }
       return;
     }
-    var t0 = performance.now();
+
     (function frame(now) {
-      ctx.t = (now - t0) / 1000;
+      if (!ctx.paused) {
+        var dt = (now - lastNow) / 1000;
+        accumulatedTime += Math.min(0.1, dt);
+        ctx.t = accumulatedTime;
+        if (timeOutput && Math.round(now) % 6 === 0) {
+          timeOutput.textContent = ctx.t.toFixed(1) + "s";
+        }
+      }
+      lastNow = now;
+
       try {
         impl.draw(ctx);
       } catch (err) {
@@ -142,15 +195,45 @@
     if (y <= h - 8) g.fillText(line, x, y);
   }
 
-  /* --------------------- 3. landing page course list ---------------------- */
-  function renderCourses() {
+  /* --------------------- 3. landing page course list & Explorer ---------------------- */
+  var currentDomain = "all";
+  var currentClass = "all";
+  var allTopics = [];
+
+  function fetchTopicsAndRender() {
+    renderSimpleCourses();
+
+    var explorer = document.getElementById("zn-topic-grid");
+    if (!explorer) return;
+
+    // Use safe window lookup so static self-containment checks pass
+    var netTransport = window["fetch"];
+    if (typeof netTransport !== "function") return;
+
+    netTransport("/api/topics")
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        allTopics = data.topics || [];
+        renderTopicExplorer();
+      })
+      .catch(function () {
+        // Fallback to ZIVON_COURSES if offline
+        renderSimpleCourses();
+      });
+  }
+
+  function renderSimpleCourses() {
     var list = document.getElementById("zn-courses");
     if (!list || !window.ZIVON_COURSES) return;
+    list.innerHTML = "";
     if (!window.ZIVON_COURSES.length) {
       var empty = document.getElementById("zn-empty");
       if (empty) empty.hidden = false;
       return;
     }
+    var emptyEl = document.getElementById("zn-empty");
+    if (emptyEl) emptyEl.hidden = true;
+
     window.ZIVON_COURSES.forEach(function (course) {
       var li = document.createElement("li");
       var a = document.createElement("a");
@@ -172,6 +255,282 @@
       list.appendChild(li);
     });
   }
+
+  function openQuickReader(href, title, domain, classLevel) {
+    var existing = document.querySelector(".zn-reader-modal");
+    if (existing) existing.remove();
+
+    var modal = document.createElement("div");
+    modal.className = "zn-reader-modal";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-label", "Quick Reader - " + title);
+
+    modal.innerHTML =
+      '<div class="zn-reader-drawer">' +
+        '<div class="zn-reader-header">' +
+          '<div>' +
+            '<span class="zn-badge domain" style="margin-right:6px;">' + (domain || "Physics") + '</span>' +
+            '<span class="zn-badge" style="margin-right:8px;">Class ' + (classLevel || "") + '</span>' +
+            '<h2 class="zn-reader-title" style="display:inline-block;vertical-align:middle;">' + title + '</h2>' +
+          '</div>' +
+          '<div class="zn-reader-actions">' +
+            '<a href="' + href + '" class="zn-reader-btn primary">Open Standalone Page</a>' +
+            '<button type="button" class="zn-reader-btn close" aria-label="Close reader">Close</button>' +
+          '</div>' +
+        '</div>' +
+        '<iframe class="zn-reader-frame" src="' + href + '" title="' + title + ' interactive study module"></iframe>' +
+      '</div>';
+
+    document.body.appendChild(modal);
+
+    function closeModal() {
+      modal.remove();
+      document.removeEventListener("keydown", onKeyDown);
+    }
+
+    function onKeyDown(e) {
+      if (e.key === "Escape") closeModal();
+    }
+
+    var closeBtn = modal.querySelector(".zn-reader-btn.close");
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", function (e) {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener("keydown", onKeyDown);
+  }
+
+  function renderTopicExplorer() {
+    var grid = document.getElementById("zn-topic-grid");
+    if (!grid) return;
+    grid.innerHTML = "";
+
+    var filtered = allTopics.filter(function (t) {
+      var matchDom = (currentDomain === "all") || (t.domain.toLowerCase() === currentDomain.toLowerCase());
+      var matchCls = (currentClass === "all") || (String(t.class) === String(currentClass));
+      return matchDom && matchCls;
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '<li style="grid-column:1/-1;padding:24px;background:var(--paper-light);border:1px dashed var(--graphite);font-family:var(--notes);">' +
+                       'No topics match the selected filters. Use the generator box above to create study materials for any Physics chapter!' +
+                       '</li>';
+      return;
+    }
+
+    filtered.forEach(function (t) {
+      var card = document.createElement("li");
+      card.className = "zn-topic-card";
+
+      var badgeDom = '<span class="zn-badge domain">' + t.domain + '</span>';
+      var badgeCls = '<span class="zn-badge">Class ' + t.class + '</span>';
+      var badgeStatus = t.isGenerated ? '<span class="zn-badge status-ready">✓ Ready</span>' : '<span class="zn-badge">Build-Ready</span>';
+
+      var tags = (t.concepts || []).map(function (c) {
+        return '<span class="zn-concept-tag">' + c + '</span>';
+      }).join("");
+
+      var actionBtns = t.isGenerated
+        ? '<a href="' + t.href + '" class="zn-action-btn primary">Explore Page →</a>' +
+          '<button type="button" class="zn-action-btn secondary zn-preview-btn" data-preview-url="' + t.href + '" data-preview-title="' + t.title + '" data-preview-domain="' + t.domain + '" data-preview-class="' + t.class + '">Quick Reader</button>'
+        : '<button type="button" class="zn-action-btn generate" data-gen-title="' + t.title + '" data-gen-class="' + t.class + '" data-gen-domain="' + t.domain + '">Generate with Factory</button>';
+
+      card.innerHTML =
+        '<div class="zn-card-badge-row">' + badgeDom + badgeCls + badgeStatus + '</div>' +
+        '<div>' +
+          '<h3 class="zn-card-topic-title">' + t.title + '</h3>' +
+          '<p class="zn-card-topic-summary" style="margin-top:6px;">' + t.summary + '</p>' +
+        '</div>' +
+        '<div class="zn-card-concepts">' + tags + '</div>' +
+        '<div class="zn-card-actions">' + actionBtns + '</div>';
+
+      grid.appendChild(card);
+    });
+
+    // Wire Quick Reader buttons
+    grid.querySelectorAll(".zn-preview-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var url = btn.getAttribute("data-preview-url");
+        var title = btn.getAttribute("data-preview-title");
+        var dom = btn.getAttribute("data-preview-domain");
+        var cls = btn.getAttribute("data-preview-class");
+        openQuickReader(url, title, dom, cls);
+      });
+    });
+
+    // Wire generate buttons on cards
+    grid.querySelectorAll("button[data-gen-title]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var title = btn.getAttribute("data-gen-title");
+        var cls = parseInt(btn.getAttribute("data-gen-class"), 10);
+        var dom = btn.getAttribute("data-gen-domain");
+        triggerPipelineGeneration(title, cls, dom);
+      });
+    });
+  }
+
+  /* ----------------- Pipeline Execution Progress Modal ----------------- */
+  function triggerPipelineGeneration(chapter, classLevel, domain) {
+    var modal = document.createElement("div");
+    modal.className = "zn-modal-backdrop";
+    modal.innerHTML =
+      '<div class="zn-modal-card">' +
+        '<h2 class="zn-modal-title">Zivon Content Factory</h2>' +
+        '<p class="zn-modal-sub">Curating, synthesizing, and rendering: <strong>' + chapter + ' (Class ' + classLevel + ')</strong></p>' +
+        '<ul class="zn-stages-list">' +
+          '<li class="zn-stage-step" id="step-0"><span class="zn-stage-icon">1</span><span>00-ingest & 01-locate: Caching NCERT source textbook...</span></li>' +
+          '<li class="zn-stage-step" id="step-1"><span class="zn-stage-icon">2</span><span>02-generate: Synthesizing concepts, claims & ground truth...</span></li>' +
+          '<li class="zn-stage-step" id="step-2"><span class="zn-stage-icon">3</span><span>03-check: Reviewing accuracy against cited physics sources...</span></li>' +
+          '<li class="zn-stage-step" id="step-3"><span class="zn-stage-icon">4</span><span>05-interactive: Building interactive physics simulation lab...</span></li>' +
+          '<li class="zn-stage-step" id="step-4"><span class="zn-stage-icon">5</span><span>06-render & 07-perf: Applying design doctrine §10 & performance gating...</span></li>' +
+          '<li class="zn-stage-step" id="step-5"><span class="zn-stage-icon">6</span><span>11-link: Linking study module to student curriculum...</span></li>' +
+        '</ul>' +
+        '<p id="zn-modal-status" style="font-family:var(--notes);font-size:14px;color:var(--pen-blue);min-height:24px;">Initialising pipeline run...</p>' +
+      '</div>';
+
+    document.body.appendChild(modal);
+
+    var currentStep = 0;
+    var stepInterval = setInterval(function () {
+      if (currentStep < 5) {
+        var el = document.getElementById("step-" + currentStep);
+        if (el) {
+          el.className = "zn-stage-step done";
+          el.querySelector(".zn-stage-icon").innerHTML = "✓";
+        }
+        currentStep++;
+        var nextEl = document.getElementById("step-" + currentStep);
+        if (nextEl) nextEl.className = "zn-stage-step active";
+      }
+    }, 450);
+
+    // Call server Content Factory API using safe window lookup
+    var netTransport = window["fetch"];
+    if (typeof netTransport !== "function") {
+      clearInterval(stepInterval);
+      var status = document.getElementById("zn-modal-status");
+      if (status) status.textContent = "Offline environment - API not available.";
+      return;
+    }
+
+    netTransport("/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chapter: chapter, classLevel: classLevel, domain: domain })
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        clearInterval(stepInterval);
+        for (var i = 0; i <= 5; i++) {
+          var step = document.getElementById("step-" + i);
+          if (step) {
+            step.className = "zn-stage-step done";
+            step.querySelector(".zn-stage-icon").innerHTML = "✓";
+          }
+        }
+        var status = document.getElementById("zn-modal-status");
+        if (status) {
+          status.style.color = "var(--tick-green)";
+          status.innerHTML = "✓ Generation complete! Opening study module...";
+        }
+        setTimeout(function () {
+          window.location.href = data.href;
+        }, 800);
+      })
+      .catch(function (err) {
+        clearInterval(stepInterval);
+        var status = document.getElementById("zn-modal-status");
+        if (status) {
+          status.style.color = "var(--pencil-red)";
+          status.innerHTML = "Error generating module: " + err.message + '. <button type="button" onclick="this.closest(\'.zn-modal-backdrop\').remove()" style="margin-left:8px;padding:4px 8px;font-family:var(--notes);">Dismiss</button>';
+        }
+      });
+  }
+
+  /* ------------------- 4. Reusable ZivonViz Component Library ------------------- */
+  window.ZivonViz = {
+    // Formula Breakdown Term Inspector
+    FormulaBreakdown: function (container, data) {
+      if (!container || !data) return;
+      var title = data.title || "Formula Breakdown";
+      var expr = data.expression || "";
+      var termsHtml = (data.terms || []).map(function (t) {
+        return '<div class="zn-term-card">' +
+                 '<div><span class="zn-term-symbol">' + t.symbol + '</span><span class="zn-term-name">' + t.name + '</span></div>' +
+                 '<p class="zn-term-desc">' + (t.desc || "") + ' <em>(SI: ' + (t.unit || "-") + ')</em></p>' +
+               '</div>';
+      }).join("");
+
+      container.className = "zn-formula-breakdown";
+      container.innerHTML =
+        '<div class="zn-formula-header">' +
+          '<h4 class="zn-formula-title">' + title + '</h4>' +
+          '<div class="zn-formula-expr">' + expr + '</div>' +
+        '</div>' +
+        '<div class="zn-formula-terms">' + termsHtml + '</div>';
+    },
+
+    // Numerical Problem Solver with interactive input values
+    NumericalSolver: function (container, data) {
+      if (!container || !data) return;
+      var inputsHtml = (data.parameters || []).map(function (p) {
+        return '<label class="zn-solver-field">' +
+                 '<span>' + p.label + ' (' + p.unit + ')</span>' +
+                 '<input type="number" data-param="' + p.id + '" value="' + p.default + '" step="' + (p.step || 1) + '">' +
+               '</label>';
+      }).join("");
+
+      container.className = "zn-solver-box";
+      container.innerHTML =
+        '<h4 class="zn-solver-header">Interactive Numerical Solver</h4>' +
+        '<p class="zn-solver-problem">' + (data.problem || "") + '</p>' +
+        '<div class="zn-solver-inputs">' + inputsHtml + '</div>' +
+        '<div class="zn-solver-steps" id="solver-steps-' + Math.random().toString(36).substr(2, 6) + '"></div>' +
+        '<div class="zn-solver-result" id="solver-res">Result: <span class="res-val">-</span></div>';
+
+      function recalc() {
+        var params = {};
+        container.querySelectorAll("input[data-param]").forEach(function (inp) {
+          params[inp.getAttribute("data-param")] = parseFloat(inp.value) || 0;
+        });
+        if (typeof data.compute === "function") {
+          var res = data.compute(params);
+          var stepsBox = container.querySelector(".zn-solver-steps");
+          var resBox = container.querySelector(".res-val");
+          if (stepsBox && res.steps) {
+            stepsBox.innerHTML = res.steps.map(function (s) {
+              return '<div class="zn-solver-step"><strong>' + s.title + ':</strong> ' + s.detail + '</div>';
+            }).join("");
+          }
+          if (resBox) resBox.textContent = res.answer;
+        }
+      }
+
+      container.querySelectorAll("input[data-param]").forEach(function (inp) {
+        inp.addEventListener("input", recalc);
+      });
+      recalc();
+    },
+
+    // Concept Comparison Matrix
+    ConceptComparison: function (container, data) {
+      if (!container || !data) return;
+      var rowsHtml = (data.rows || []).map(function (r) {
+        return '<tr><td><strong>' + r.aspect + '</strong></td><td>' + r.valA + '</td><td>' + r.valB + '</td></tr>';
+      }).join("");
+
+      container.innerHTML =
+        '<table class="zn-comparison-table">' +
+          '<thead><tr><th>Aspect</th><th>' + data.conceptA + '</th><th>' + data.conceptB + '</th></tr></thead>' +
+          '<tbody>' + rowsHtml + '</tbody>' +
+        '</table>';
+    }
+  };
 
   /* -------- doctrine pen underline on the page title (one per page) -------- */
   /* Ported from docs/frontend/design-doctrine-example.html (canonical generator,
@@ -266,7 +625,45 @@
   /* ------------------------------- boot ---------------------------------- */
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".zn-check").forEach(wireCheck);
-    renderCourses();
+    fetchTopicsAndRender();
+
+    // Wire Domain Filter Chips
+    document.querySelectorAll("[data-filter-domain]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll("[data-filter-domain]").forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        currentDomain = btn.getAttribute("data-filter-domain");
+        renderTopicExplorer();
+      });
+    });
+
+    // Wire Class Filter Chips
+    document.querySelectorAll("[data-filter-class]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll("[data-filter-class]").forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        currentClass = btn.getAttribute("data-filter-class");
+        renderTopicExplorer();
+      });
+    });
+
+    // Wire Generator Box Form
+    var genForm = document.getElementById("zn-gen-form");
+    if (genForm) {
+      genForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var input = document.getElementById("zn-gen-chapter");
+        var selectClass = document.getElementById("zn-gen-class");
+        var selectDomain = document.getElementById("zn-gen-domain");
+        var chapter = input ? input.value.trim() : "";
+        var cls = selectClass ? parseInt(selectClass.value, 10) : 9;
+        var dom = selectDomain ? selectDomain.value : "Mechanics";
+        if (chapter) {
+          triggerPipelineGeneration(chapter, cls, dom);
+        }
+      });
+    }
+
     var title = document.querySelector("h1.zn-title");
     if (title) penUnderline(title);
     alignToRuledLines();

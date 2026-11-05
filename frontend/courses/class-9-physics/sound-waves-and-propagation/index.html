@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; base-uri 'none'">
+<title>Sound Waves &amp; Propagation - Zivon Physics</title>
+<link rel="stylesheet" href="../../../assets/zivon.css">
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+<main class="zn-page">
+  <header class="zn-header">
+    <p class="zn-kicker"><a href="../../../index.html" style="text-decoration:none;color:inherit;">← Course Hub</a> · Class 9 Physics · Waves</p>
+    <h1 class="zn-title">Sound Waves &amp; Propagation</h1>
+    <p class="zn-objectives-label">Learning Objectives:</p>
+    <ul class="zn-objectives">
+      <li>Differentiate clearly between longitudinal (sound) and transverse waves.</li>
+      <li>Calculate wave speed, wavelength, and frequency using v = f·λ.</li>
+      <li>Demonstrate wave superposition and interference (constructive vs destructive).</li>
+      <li>Explain how amplitude determines loudness and frequency determines pitch.</li>
+    </ul>
+  </header>
+
+  
+  <section class="zn-equations" style="margin:36px 0;">
+    <h3 style="font-family:var(--hand);font-size:28px;margin-bottom:12px;">Key Physics Formulas</h3>
+    
+      <div class="zn-eq-card" style="background:var(--paper-light);border:1px solid var(--ink);padding:14px;margin-bottom:12px;">
+        <code style="font-family:var(--notes);font-size:18px;font-weight:bold;color:var(--pen-blue);">v = f * λ</code>
+        <p style="margin:4px 0 0;font-size:14px;color:var(--graphite);font-family:var(--notes);">Wave speed formula</p>
+      </div>
+      <div class="zn-eq-card" style="background:var(--paper-light);border:1px solid var(--ink);padding:14px;margin-bottom:12px;">
+        <code style="font-family:var(--notes);font-size:18px;font-weight:bold;color:var(--pen-blue);">T = 1 / f</code>
+        <p style="margin:4px 0 0;font-size:14px;color:var(--graphite);font-family:var(--notes);">Time period definition</p>
+      </div>
+  </section>
+
+  <section class="zn-text" id="b-01">
+    <p>Sound in air is a longitudinal mechanical wave: a vibrating tuning fork pushes adjacent air molecules together into &#039;compressions&#039; (high pressure) and pulls back creating &#039;rarefactions&#039; (low pressure).</p>
+    <p>Light and electromagnetic waves, by contrast, are transverse: electric and magnetic fields oscillate perpendicular to the direction of propagation.</p>
+  </section>
+
+  <figure class="zn-diagram" id="b-02">
+    <div class="zn-diagram-svg"><svg viewBox='0 0 380 200' aria-label='Sinusoidal wave anatomy'><line x1='30' y1='100' x2='360' y2='100' stroke='#5A5748' stroke-width='2' stroke-dasharray='4,4'/><path d='M 30 100 Q 70 20 110 100 T 190 100 T 270 100 T 350 100' fill='none' stroke='#1F3A9E' stroke-width='3'/><line x1='70' y1='100' x2='70' y2='20' stroke='#B3261E' stroke-width='2.2'/><polygon points='66,28 70,18 74,28' fill='#B3261E'/><text x='78' y='55' fill='#B3261E' font-family='Caveat' font-size='20' font-weight='700'>Amplitude A</text><line x1='70' y1='16' x2='230' y2='16' stroke='#1C1B18' stroke-width='2'/><polygon points='76,12 66,16 76,20' fill='#1C1B18'/><polygon points='224,12 234,16 224,20' fill='#1C1B18'/><text x='150' y='12' fill='#1C1B18' font-family='Caveat' font-size='20' font-weight='700' text-anchor='middle'>Wavelength λ</text><text x='70' y='120' font-family='Caveat' font-size='18' font-weight='700' fill='#1F3A9E'>Crest</text><text x='150' y='180' font-family='Caveat' font-size='18' font-weight='700' fill='#1F3A9E'>Trough</text></svg></div>
+    <figcaption>Sinusoidal wave: Wavelength (λ) is peak-to-peak distance; Amplitude (A) is peak displacement from centerline.</figcaption>
+  </figure>
+
+  <section class="zn-sim zn-sim-b-03" id="b-03" data-sim-id="b-03" aria-label="Interactive Wave &amp; Superposition Lab">
+    <h3>Interactive Wave &amp; Superposition Lab</h3>
+    <div class="zn-sim-controls">
+      <label class="zn-sim-control"><span>Amplitude A (cm)</span><input type="range" data-control="amplitude" min="10" max="40" step="2" value="24"><output>24</output></label>
+      <label class="zn-sim-control"><span>Frequency f (Hz)</span><input type="range" data-control="frequency" min="0.5" max="3" step="0.1" value="1.2"><output>1.2</output></label>
+      <label class="zn-sim-control"><span>Wavelength λ (cm)</span><input type="range" data-control="wavelength" min="40" max="140" step="5" value="80"><output>80</output></label>
+    </div>
+    <div class="zn-sim-canvas-wrap">
+      <canvas class="zn-sim-canvas" width="480" height="288" tabindex="0"></canvas>
+    </div>
+    <p class="zn-sim-desc">Control wave amplitude, frequency, and wave speed to see animated transverse particle displacement and wave interference.</p>
+  </section>
+
+  <section class="zn-formula-breakdown" id="b-03-formula" aria-label="Wave Equation &amp; Frequency Relationships">
+    <div class="zn-formula-header">
+      <h4 class="zn-formula-title">Wave Equation &amp; Frequency Relationships</h4>
+      <div class="zn-formula-expr">v = f · λ  ·  T = 1 / f</div>
+    </div>
+    <div class="zn-formula-terms">
+      
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">v</span><span class="zn-term-name">Wave Propagation Speed</span></div>
+        <p class="zn-term-desc">Speed at which energy and phase advance through the medium. <em>(SI: Meters per second (m/s))</em></p>
+      </div>
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">f</span><span class="zn-term-name">Wave Frequency</span></div>
+        <p class="zn-term-desc">Number of full oscillation cycles passing a fixed point per unit time. <em>(SI: Hertz (Hz = 1/s))</em></p>
+      </div>
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">λ</span><span class="zn-term-name">Wavelength</span></div>
+        <p class="zn-term-desc">Distance between consecutive crests, compressions, or in-phase points. <em>(SI: Meters (m))</em></p>
+      </div>
+      <div class="zn-term-card">
+        <div><span class="zn-term-symbol">T</span><span class="zn-term-name">Time Period</span></div>
+        <p class="zn-term-desc">Duration required to execute one complete particle oscillation. <em>(SI: Seconds (s))</em></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="zn-comparison-block" id="b-03-comparison" style="margin:28px 0;">
+    <h3 style="font-family:var(--hand);font-size:26px;margin:0 0 10px;">Wave Categorization: Transverse vs Longitudinal Waves</h3>
+    <table class="zn-comparison-table">
+      <thead>
+        <tr>
+          <th>Aspect</th>
+          <th>Transverse Waves</th>
+          <th>Longitudinal Waves</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      <tr>
+        <td><strong>Particle Oscillation</strong></td>
+        <td>Perpendicular (90°) to direction of wave propagation</td>
+        <td>Parallel (0° / 180°) along line of wave propagation</td>
+      </tr>
+      <tr>
+        <td><strong>Anatomy</strong></td>
+        <td>Alternating crests (peaks) and troughs (valleys)</td>
+        <td>Alternating compressions (high density) and rarefactions</td>
+      </tr>
+      <tr>
+        <td><strong>Polarization</strong></td>
+        <td>Can be plane-polarized (light, EM waves)</td>
+        <td>Cannot be polarized (pressure fluctuations)</td>
+      </tr>
+      <tr>
+        <td><strong>Typical Examples</strong></td>
+        <td>Light waves, radio waves, ripples on water surface</td>
+        <td>Sound waves in air, ultrasound, seismic P-waves</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="zn-solver-box" id="b-03-solver" data-solver-type="waves-speed">
+    <h4 class="zn-solver-header">Interactive Wave Speed &amp; Period Solver</h4>
+    <p class="zn-solver-problem">Input wave frequency f in Hertz and wavelength λ in meters to calculate wave speed v and oscillation period T.</p>
+    <div class="zn-solver-inputs">
+      
+      <label class="zn-solver-field">
+        <span>Frequency f (Hz)</span>
+        <input type="number" data-param="freq" value="256" step="10">
+      </label>
+      <label class="zn-solver-field">
+        <span>Wavelength λ (m)</span>
+        <input type="number" data-param="lambda" value="1.3" step="0.1">
+      </label>
+    </div>
+    <div class="zn-solver-steps" id="steps-b-03-solver"></div>
+    <div class="zn-solver-result">Result: <span class="res-val" id="res-b-03-solver">-</span></div>
+  </section>
+
+  <section class="zn-reveal" id="b-03-derivation">
+    <h3>Step-by-Step Derivation: The Universal Wave Speed Equation v = f · λ</h3>
+    <details class="zn-reveal-step"><summary>Step 1: General Definition of Speed</summary><p>Speed is distance traversed divided by elapsed time: Speed = Distance / Time.</p></details>
+      <details class="zn-reveal-step"><summary>Step 2: Relate Wavelength to Wave Period</summary><p>In exactly one period (T seconds), a wave profile advances forward by one complete wavelength (λ meters). Thus: v = λ / T.</p></details>
+      <details class="zn-reveal-step"><summary>Step 3: Relate Period to Frequency</summary><p>Frequency f is the inverse of time period: f = 1 / T &amp;rArr; 1 / T = f.</p></details>
+      <details class="zn-reveal-step"><summary>Step 4: Combine Expressions</summary><p>Substituting 1/T into the velocity relation yields: v = f · λ. This relation universally applies to all mechanical, sound, and electromagnetic waves.</p></details>
+  </section>
+
+  <section class="zn-example" id="b-04">
+    <h3>Worked Example</h3>
+    <p class="zn-example-problem">A sound wave has a frequency of 2 kHz (2000 Hz) and wavelength of 17 cm. How long will it take to travel 1.7 km?</p>
+    <ol>
+      <li><strong>Find Wave Speed v = f · λ</strong> f = 2000 Hz, λ = 17 cm = 0.17 m. Speed v = 2000 × 0.17 = 340 m/s.</li>
+      <li><strong>Compute Time to Cover Distance</strong> Distance d = 1.7 km = 1700 m. Time t = d / v = 1700 m / 340 m/s = 5.0 seconds.</li>
+    </ol>
+    <p class="zn-answer"><span class="zn-answer-label">Answer:</span> The sound wave travels at 340 m/s and takes 5.0 seconds to cover 1.7 km.</p>
+  </section>
+
+  <fieldset class="zn-check" id="b-05" data-format="mcq" data-answer-index="0">
+    <legend>If a wave&#039;s frequency is doubled while traveling through the same uniform medium, what happens to its wavelength?</legend>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="0"> <span>Wavelength is halved (λ/2)</span></label>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="1"> <span>Wavelength doubles (2λ)</span></label>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="2"> <span>Wavelength quadruples (4λ)</span></label>
+      <label class="zn-opt"><input type="radio" name="check-b-05" value="3"> <span>Wavelength remains unchanged</span></label>
+    <button type="button" class="zn-check-btn">Check</button>
+    <p class="zn-check-feedback" aria-live="polite"></p>
+    <details class="zn-check-why"><summary>Why?</summary><p>In a uniform medium, speed v is constant. Since v = f·λ, doubling frequency f requires wavelength λ to halve.</p></details>
+  </fieldset>
+
+  
+  <section class="zn-misconceptions" style="margin:36px 0;background:var(--paper-light);border:1px solid var(--ink);padding:18px;">
+    <h3 style="font-family:var(--hand);font-size:28px;margin-top:0;">Common Student Misconceptions</h3>
+    <ul style="list-style:none;padding:0;">
+      <li style="margin-bottom:12px;font-family:var(--notes);font-size:15px;line-height:24px;">
+        <span style="color:var(--pencil-red);font-weight:bold;border:1px solid var(--pencil-red);padding:2px 6px;margin-right:8px;">MYTH</span>Air particles travel all the way from the speaker&#039;s mouth to the listener&#039;s ear.<br>
+        <span style="color:var(--tick-green);font-weight:bold;border:1px solid var(--tick-green);padding:2px 6px;margin-right:8px;">REALITY</span>Particles merely oscillate back and forth about their mean positions; only the energy wave travels.
+      </li></ul>
+  </section>
+
+  <section class="zn-glossary">
+    <h2>Glossary of Terms</h2>
+    <dl>
+      <dt>Amplitude (A)</dt><dd>The maximum displacement of a particle from its mean position.</dd>
+      <dt>Hertz (Hz)</dt><dd>Unit of frequency equal to one oscillation per second.</dd>
+    </dl>
+  </section>
+
+  <footer class="zn-footer">
+    <p class="zn-sources">Generated by the Zivon content factory. Sources: Science - Textbook for Grade 9 (2025 edition). Certified for educational use.</p>
+  </footer>
+</main>
+<script src="../../../assets/zivon.js"></script>
+<script src="page.js"></script>
+</body>
+</html>

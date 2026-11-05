@@ -1,0 +1,32 @@
+{
+  "course_id": "class-10-physics",
+  "class": 10,
+  "topic_slug": "light-reflection-and-refraction",
+  "title": "Light - Reflection and Refraction",
+  "chapter": {
+    "query": "Light - Reflection and Refraction",
+    "title": "Light - Reflection and Refraction",
+    "book": "Science - Textbook for Class X",
+    "domain": "Optics"
+  },
+  "sources": [
+    {
+      "id": "ncert-class-10",
+      "title": "Science - Textbook for Class X",
+      "license": "NCERT (free educational use)"
+    }
+  ],
+  "run_id": "light-reflection-and-refraction-c10",
+  "generated_at": "2026-11-05T18:50:14.348Z",
+  "block_counts": {
+    "text": 1,
+    "diagram": 1,
+    "simulation": 1,
+    "formula_breakdown": 1,
+    "comparison": 1,
+    "numerical_solver": 1,
+    "reveal": 1,
+    "worked_example": 1,
+    "check": 1
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Zivon",
+  "description": "A voice-first AI tutor for Indian learners studying academic Physics.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

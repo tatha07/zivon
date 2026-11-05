@@ -1,0 +1,29 @@
+{
+  "course_id": "class-9-physics",
+  "class": 9,
+  "topic_slug": "gravitation-and-free-fall",
+  "title": "Gravitation & Free Fall",
+  "chapter": {
+    "query": "Gravitation",
+    "title": "Gravitation & Free Fall",
+    "book": "Science - Textbook for Grade 9 (2025 edition)",
+    "domain": "Mechanics"
+  },
+  "sources": [
+    {
+      "id": "ncert-class-9",
+      "title": "Science - Textbook for Grade 9 (2025 edition)",
+      "license": "NCERT (free educational use)"
+    }
+  ],
+  "run_id": "gravitation-and-free-fall-c9",
+  "generated_at": "2026-11-05T18:50:47.401Z",
+  "block_counts": {
+    "text": 1,
+    "diagram": 1,
+    "simulation": 1,
+    "worked_example": 1,
+    "reveal": 1,
+    "check": 1
+  }
+}

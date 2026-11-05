@@ -1,1 +1,202 @@
-ZivonSim.register('b-06',{init:function(ctx){ctx.ready=true;},draw:function(ctx){var canvas=ctx.canvas,g=ctx.g;var dpr=(typeof window!=='undefined'&&window.devicePixelRatio)||1;var cssW=canvas.clientWidth||ctx.width||320;var cssH=canvas.clientHeight||ctx.height||260;var pw=Math.round(cssW*dpr),ph=Math.round(cssH*dpr);if(canvas.width!==pw||canvas.height!==ph){canvas.width=pw;canvas.height=ph;}ctx.width=cssW;ctx.height=cssH;ctx.dpr=dpr;g.setTransform(dpr,0,0,dpr,0,0);var W=cssW,H=cssH;var vals=ctx.values||{};var R=Math.round(Number(vals.right_force));if(!isFinite(R))R=10;R=Math.max(0,Math.min(20,R));var L=Math.round(Number(vals.left_force));if(!isFinite(L))L=6;L=Math.max(0,Math.min(20,L));var PAPER_LIGHT='#F6F0CF',PAPER='#EFE6B8',INK='#1C1B18',GRAPHITE='#5A5748',PEN_BLUE='#1F3A9E';g.fillStyle=PAPER_LIGHT;g.fillRect(0,0,W,H);function seedFrom(s){var h=2166136261>>>0;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=(t+Math.imul(t^t>>>7,61|t))^t;return((t^t>>>14)>>>0)/4294967296;};}function clamp(v,a,b){return Math.min(Math.max(v,a),b);}function handLine(g,x1,y1,x2,y2,seed,jitter,width,color,dash){var dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy);if(len<1)return;var n=Math.max(2,Math.round(len/28));var rnd=rng(seedFrom(seed));var pts=[];for(var i=0;i<=n;i++){var t=i/n;var x=x1+dx*t,y=y1+dy*t;if(i>0&&i<n){x+=(rnd()-0.5)*jitter;y+=(rnd()-0.5)*jitter;}pts.push([x,y]);}g.beginPath();g.moveTo(pts[0][0],pts[0][1]);for(var i=1;i<pts.length-1;i++){var xc=(pts[i][0]+pts[i+1][0])/2,yc=(pts[i][1]+pts[i+1][1])/2;g.quadraticCurveTo(pts[i][0],pts[i][1],xc,yc);}g.lineTo(pts[pts.length-1][0],pts[pts.length-1][1]);g.strokeStyle=color;g.lineWidth=width;g.lineCap='round';g.lineJoin='round';if(dash&&g.setLineDash)g.setLineDash(dash);else if(g.setLineDash)g.setLineDash([]);g.stroke();if(g.setLineDash)g.setLineDash([]);}function drawArrow(g,x1,y1,x2,y2,seed,color,width,jitter,dash){var dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy);if(len<2)return;handLine(g,x1,y1,x2,y2,seed,jitter,width,color,dash);var angle=Math.atan2(dy,dx);var h=Math.max(4,Math.min(12,len*0.45));var a1=angle-0.45,a2=angle+0.45;handLine(g,x2-h*Math.cos(a1),y2-h*Math.sin(a1),x2,y2,seed+'a',jitter*0.5,width,color);handLine(g,x2-h*Math.cos(a2),y2-h*Math.sin(a2),x2,y2,seed+'b',jitter*0.5,width,color);}var blockW=clamp(W*0.22,40,92);var blockH=clamp(H*0.18,28,50);var cx=W/2;var cy=H*0.55;var maxArrow=clamp((W-blockW)/2-24,0,220);var scale=maxArrow/20;var scaleSum=maxArrow/40;var bx=cx-blockW/2,by=cy-blockH/2;g.fillStyle=PAPER;g.fillRect(bx,by,blockW,blockH);handLine(g,bx,by,bx+blockW,by,'b-06-top',1.2,2.6,INK);handLine(g,bx+blockW,by,bx+blockW,by+blockH,'b-06-right',1.2,2.6,INK);handLine(g,bx+blockW,by+blockH,bx,by+blockH,'b-06-bottom',1.2,2.6,INK);handLine(g,bx,by+blockH,bx,by,'b-06-left',1.2,2.6,INK);g.fillStyle=INK;g.font='700 20px Caveat, Kalam, cursive';g.textAlign='center';g.textBaseline='middle';g.fillText('block',cx,cy);var rightTail=bx+blockW+6;var leftTail=bx-6;var rightHead=rightTail+R*scale;var leftHead=leftTail-L*scale;if(R>0)drawArrow(g,rightTail,cy,rightHead,cy,'b-06-right-force',INK,3,1.2);if(L>0)drawArrow(g,leftTail,cy,leftHead,cy,'b-06-left-force',INK,3,1.2);g.font='700 14px "Courier Prime", "Courier New", monospace';g.textAlign='center';g.textBaseline='bottom';g.fillStyle=INK;var rightLabelX=clamp(R>0?(rightTail+rightHead)/2:rightTail,24,W-24);g.fillText(R+' N',rightLabelX,cy-10);var leftLabelX=clamp(L>0?(leftTail+leftHead)/2:leftTail,24,W-24);g.fillText(L+' N',leftLabelX,cy-10);var net=R-L;var mag=Math.abs(net);var netY=by-26;if(mag>0){var dir=net>0?1:-1;var netHead=cx+dir*mag*scale;drawArrow(g,cx,netY,netHead,netY,'b-06-net',PEN_BLUE,3,1.2);g.fillStyle=PEN_BLUE;g.font='700 14px "Courier Prime", "Courier New", monospace';g.textAlign='center';g.textBaseline='bottom';g.fillText(mag+' N',clamp((cx+netHead)/2,24,W-24),netY-10);}else{g.fillStyle=PEN_BLUE;g.font='700 14px "Courier Prime", "Courier New", monospace';g.textAlign='center';g.textBaseline='middle';g.fillText('0 N',cx,netY);}var sum=R+L;var sumY=by+blockH+26;if(sum>0){var sumHead=cx+sum*scaleSum;drawArrow(g,cx,sumY,sumHead,sumY,'b-06-sum',GRAPHITE,2.6,1.0,[7,8]);}var larger=R>=L?'right':'left';var oppositeLong=mag===0?'Opposite: 0 N':'Opposite: '+Math.max(R,L)+'-'+Math.min(R,L)+'='+mag+' N '+larger;var oppositeShort=mag===0?'Opposite: 0 N':'Opposite: '+mag+' N '+larger;var sameLong='If both right: '+R+'+'+L+'='+sum+' N';var sameShort='Same: '+sum+' N';var font12='700 12px "Courier Prime", "Courier New", monospace';g.font=font12;var maxW=W-24;var oppositeText=g.measureText(oppositeLong).width<=maxW?oppositeLong:oppositeShort;var sameText=g.measureText(sameLong).width<=maxW?sameLong:sameShort;g.fillStyle=INK;g.textAlign='center';g.textBaseline='middle';g.fillText(oppositeText,W/2,H-28);g.fillStyle=GRAPHITE;g.fillText(sameText,W/2,H-12);}});
+ZivonSim.register('b-03', {
+  init: function(ctx) {
+    ctx.ready = true;
+    ctx.blockPos = 0;
+    ctx.velocity = 0;
+  },
+  draw: function(ctx) {
+    var canvas = ctx.canvas, g = ctx.g;
+    var dpr = (typeof window !== 'undefined' && window.devicePixelRatio) || 1;
+    var W = canvas.clientWidth || ctx.width || 480;
+    var H = canvas.clientHeight || ctx.height || 288;
+    var pw = Math.round(W * dpr), ph = Math.round(H * dpr);
+    if (canvas.width !== pw || canvas.height !== ph) {
+      canvas.width = pw; canvas.height = ph;
+    }
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var PAPER_LIGHT = '#F6F0CF', PAPER = '#EFE6B8', INK = '#1C1B18', GRAPHITE = '#5A5748', PEN_BLUE = '#1F3A9E', RED = '#B3261E';
+    g.fillStyle = PAPER_LIGHT;
+    g.fillRect(0, 0, W, H);
+
+    // Read values
+    var F_app = parseFloat(ctx.values.applied_force !== undefined ? ctx.values.applied_force : (ctx.values.right_force || 24));
+    var F_fric = parseFloat(ctx.values.friction_force !== undefined ? ctx.values.friction_force : (ctx.values.left_force || 8));
+    var mass = parseFloat(ctx.values.mass || 4);
+
+    var F_net = F_app - F_fric;
+    var accel = F_net / mass;
+
+    // Animate position
+    if (!ctx.paused) {
+      ctx.velocity += accel * 0.016;
+      if (F_net <= 0 && ctx.velocity < 0) ctx.velocity = 0;
+      ctx.blockPos += ctx.velocity * 0.8;
+      if (ctx.blockPos > W - 100) ctx.blockPos = -20;
+    }
+
+    // Ground line
+    var groundY = H * 0.65;
+    g.beginPath();
+    g.moveTo(20, groundY);
+    g.lineTo(W - 20, groundY);
+    g.strokeStyle = INK;
+    g.lineWidth = 3;
+    g.stroke();
+
+    // Hatching under ground
+    for (var x = 24; x < W - 20; x += 16) {
+      g.beginPath();
+      g.moveTo(x, groundY);
+      g.lineTo(x - 8, groundY + 10);
+      g.strokeStyle = GRAPHITE;
+      g.lineWidth = 1.5;
+      g.stroke();
+    }
+
+    // Moving Block
+    var bx = Math.max(30, Math.min(W - 120, (W * 0.35) + (ctx.blockPos % (W * 0.5))));
+    var bw = 70, bh = 46;
+    var by = groundY - bh;
+
+    g.fillStyle = PAPER;
+    g.fillRect(bx, by, bw, bh);
+    g.strokeStyle = INK;
+    g.lineWidth = 2.5;
+    g.strokeRect(bx, by, bw, bh);
+
+    g.fillStyle = INK;
+    g.font = '700 16px Caveat, cursive';
+    g.textAlign = 'center';
+    g.fillText(mass + ' kg', bx + bw/2, by + bh/2 + 5);
+
+    // Force vectors
+    function drawArrow(x1, y1, x2, y2, color, label) {
+      var dx = x2 - x1, dy = y2 - y1;
+      var len = Math.sqrt(dx*dx + dy*dy);
+      if (len < 5) return;
+      g.beginPath();
+      g.moveTo(x1, y1);
+      g.lineTo(x2, y2);
+      g.strokeStyle = color;
+      g.lineWidth = 3;
+      g.stroke();
+
+      var angle = Math.atan2(dy, dx);
+      var head = 10;
+      g.beginPath();
+      g.moveTo(x2, y2);
+      g.lineTo(x2 - head * Math.cos(angle - 0.4), y2 - head * Math.sin(angle - 0.4));
+      g.lineTo(x2 - head * Math.cos(angle + 0.4), y2 - head * Math.sin(angle + 0.4));
+      g.closePath();
+      g.fillStyle = color;
+      g.fill();
+
+      g.font = '700 13px "Courier Prime", monospace';
+      g.fillStyle = color;
+      g.fillText(label, (x1 + x2)/2, y1 - 8);
+    }
+
+    if (F_app > 0) drawArrow(bx + bw, by + bh/2, bx + bw + Math.min(120, F_app * 3), by + bh/2, PEN_BLUE, 'F_app = ' + F_app + 'N');
+    if (F_fric > 0) drawArrow(bx, by + bh/2, bx - Math.min(80, F_fric * 3), by + bh/2, RED, 'Fric = ' + F_fric + 'N');
+
+    // Net Force indicator bar
+    g.font = '700 14px "Courier Prime", monospace';
+    g.textAlign = 'left';
+    g.fillStyle = INK;
+    g.fillText('Net Force F_net: ' + F_net.toFixed(1) + ' N', 24, 30);
+    g.fillStyle = PEN_BLUE;
+    g.fillText('Acceleration a = F/m: ' + accel.toFixed(2) + ' m/s²', 24, 52);
+    g.fillStyle = GRAPHITE;
+    g.fillText('Velocity: ' + ctx.velocity.toFixed(1) + ' m/s', 24, 74);
+  }
+});
+
+(function() {
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".zn-solver-box").forEach(function(box) {
+      var type = box.getAttribute("data-solver-type");
+      var stepsEl = box.querySelector(".zn-solver-steps");
+      var resEl = box.querySelector(".res-val");
+      var inputs = box.querySelectorAll("input[data-param]");
+
+      function update() {
+        var vals = {};
+        inputs.forEach(function(inp) {
+          vals[inp.getAttribute("data-param")] = parseFloat(inp.value) || 0;
+        });
+
+        if (type === "mechanics-net-force") {
+          var F_app = vals.applied_force !== undefined ? vals.applied_force : 50;
+          var F_fric = vals.friction_force !== undefined ? vals.friction_force : 10;
+          var m = vals.mass !== undefined ? vals.mass : 20;
+          var F_net = Math.max(0, F_app - F_fric);
+          var a = m > 0 ? F_net / m : 0;
+          var t = 3;
+          var v = a * t;
+          if (stepsEl) {
+            stepsEl.innerHTML =
+              '<div class="zn-solver-step"><strong>1. Net Unbalanced Force:</strong> F_net = F_app - F_fric = ' + F_app + ' N - ' + F_fric + ' N = ' + F_net.toFixed(1) + ' N</div>' +
+              '<div class="zn-solver-step"><strong>2. Resultant Acceleration:</strong> a = F_net / m = ' + F_net.toFixed(1) + ' N / ' + m + ' kg = ' + a.toFixed(2) + ' m/s²</div>' +
+              '<div class="zn-solver-step"><strong>3. Final Velocity (t = 3s):</strong> v = u + at = 0 + (' + a.toFixed(2) + ')(3) = ' + v.toFixed(2) + ' m/s</div>';
+          }
+          if (resEl) resEl.textContent = 'a = ' + a.toFixed(2) + ' m/s², v(3s) = ' + v.toFixed(2) + ' m/s';
+        } else if (type === "optics-lens") {
+          var u = vals.u !== undefined ? vals.u : 30;
+          var f = vals.f !== undefined ? vals.f : 15;
+          var v = (u !== f) ? (u * f) / (u - f) : 9999;
+          var m_mag = (u !== 0) ? -v / u : 1;
+          if (stepsEl) {
+            stepsEl.innerHTML =
+              '<div class="zn-solver-step"><strong>1. Lens Formula:</strong> 1/v = 1/f - 1/u &rArr; v = (u &times; f) / (u - f)</div>' +
+              '<div class="zn-solver-step"><strong>2. Image Distance:</strong> v = (' + u + ' &times; ' + f + ') / (' + u + ' - ' + f + ') = ' + (v !== 9999 ? v.toFixed(1) + ' cm' : 'Infinity') + '</div>' +
+              '<div class="zn-solver-step"><strong>3. Magnification:</strong> m = -v/u = ' + m_mag.toFixed(2) + 'x (' + (v > 0 ? 'Real, Inverted' : 'Virtual, Erect') + ')</div>';
+          }
+          if (resEl) resEl.textContent = 'v = ' + (v !== 9999 ? v.toFixed(1) + ' cm' : 'Infinity') + ', m = ' + m_mag.toFixed(2) + 'x';
+        } else if (type === "electrostatics-coulomb") {
+          var q1 = vals.q1 !== undefined ? vals.q1 : 2;
+          var q2 = vals.q2 !== undefined ? vals.q2 : 3;
+          var r = vals.r !== undefined ? vals.r : 0.3;
+          var k = 8.99e9;
+          var F = (r > 0) ? (k * (Math.abs(q1) * 1e-6) * (Math.abs(q2) * 1e-6)) / (r * r) : 0;
+          var nature = (q1 * q2 > 0) ? "Repulsive" : "Attractive";
+          if (stepsEl) {
+            stepsEl.innerHTML =
+              '<div class="zn-solver-step"><strong>1. Point Charges:</strong> q₁ = ' + q1 + ' μC, q₂ = ' + q2 + ' μC at distance r = ' + r + ' m</div>' +
+              '<div class="zn-solver-step"><strong>2. Coulomb Law:</strong> F = (8.99 &times; 10⁹) &times; |' + q1 + ' &times; ' + q2 + '| &times; 10⁻¹² / (' + r + ')²</div>' +
+              '<div class="zn-solver-step"><strong>3. Resultant Force:</strong> ' + F.toFixed(4) + ' N (' + nature + ')</div>';
+          }
+          if (resEl) resEl.textContent = 'F = ' + F.toFixed(4) + ' N (' + nature + ')';
+        } else if (type === "waves-speed") {
+          var freq = vals.freq !== undefined ? vals.freq : 256;
+          var lambda = vals.lambda !== undefined ? vals.lambda : 1.3;
+          var v = freq * lambda;
+          var T = freq > 0 ? 1 / freq : 0;
+          if (stepsEl) {
+            stepsEl.innerHTML =
+              '<div class="zn-solver-step"><strong>1. Wave Speed Formula:</strong> v = f &times; &lambda;</div>' +
+              '<div class="zn-solver-step"><strong>2. Computation:</strong> v = ' + freq + ' Hz &times; ' + lambda + ' m = ' + v.toFixed(1) + ' m/s</div>' +
+              '<div class="zn-solver-step"><strong>3. Wave Period:</strong> T = 1/f = ' + (T * 1000).toFixed(2) + ' ms</div>';
+          }
+          if (resEl) resEl.textContent = 'v = ' + v.toFixed(1) + ' m/s (T = ' + (T * 1000).toFixed(2) + ' ms)';
+        } else if (type === "thermo-first-law") {
+          var Q = vals.Q !== undefined ? vals.Q : 500;
+          var W = vals.W !== undefined ? vals.W : 200;
+          var dU = Q - W;
+          if (stepsEl) {
+            stepsEl.innerHTML =
+              '<div class="zn-solver-step"><strong>1. First Law Equation:</strong> &Delta;Q = &Delta;U + &Delta;W &rArr; &Delta;U = &Delta;Q - &Delta;W</div>' +
+              '<div class="zn-solver-step"><strong>2. Thermodynamic Balance:</strong> &Delta;U = ' + Q + ' J - ' + W + ' J = ' + dU + ' J</div>' +
+              '<div class="zn-solver-step"><strong>3. Internal Energy Change:</strong> ' + (dU >= 0 ? 'Increases by ' + dU + ' J (Heating)' : 'Decreases by ' + Math.abs(dU) + ' J (Cooling)') + '</div>';
+          }
+          if (resEl) resEl.textContent = '&Delta;U = ' + (dU >= 0 ? '+' : '') + dU + ' Joules';
+        }
+      }
+
+      inputs.forEach(function(inp) {
+        inp.addEventListener("input", update);
+      });
+      update();
+    });
+  });
+})();
